@@ -1,0 +1,421 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Michal Ovádek on Michal Ovádek</title>
+    <link>/</link>
+    <description>Recent content in Michal Ovádek on Michal Ovádek</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Michal Ovádek</copyright>
+    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>An Economic Theory of Court Performance: Evidence from the Court of Justice of the European Union</title>
+      <link>/publication/yeung-2020/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/yeung-2020/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Case Selection in the Preliminary Ruling Procedure</title>
+      <link>/publication/dyevre-2020-c/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/dyevre-2020-c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Experimental Legal Methods in the Classroom</title>
+      <link>/publication/dyevre-2020-b/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/dyevre-2020-b/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The Voices of European Law: Legislators, Judges and Law Professors</title>
+      <link>/publication/dyevre-2020-a/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/dyevre-2020-a/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Uncertainty and Legal Disintegration: Evidence from Brexit</title>
+      <link>/publication/dyevre-2020/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/dyevre-2020/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>What Political Role for the EU&#39;s Fundamental Rights Agency?</title>
+      <link>/publication/wouters-2020/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/wouters-2020/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>What&#39;s the Talk in Brussels? Leveraging Daily News Coverage to Measure Issue Attention in the European Union</title>
+      <link>/publication/ovadek-2020-a/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/ovadek-2020-a/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Who Matters Most? Measuring Importance in the EU Preliminary Reference System</title>
+      <link>/publication/ovadek-2020-b/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/ovadek-2020-b/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kernel density estimation for time series plots</title>
+      <link>/post/time-series-data-and-kernel-density/</link>
+      <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/time-series-data-and-kernel-density/</guid>
+      <description>
+
+
+&lt;p&gt;In my research I frequently encounter count data that has a temporal dimension. The standard way of visualizing such data is to take the counts grouped at some temporal level (month, year, etc). The clustering essentially does away with the problem of the y-axis, namely in that it creates variation at evenly spaced out x-axis intervals. Let’s generate randomly a bunch of dates and show an archetypal bar plot at the year level of, say, judgments.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(lubridate)
+
+set.seed(92139)
+
+dates &amp;lt;- as_date(as.Date(&amp;quot;2000-01-01&amp;quot;):as.Date(&amp;quot;2020-01-01&amp;quot;))
+
+dat &amp;lt;- sample(dates, 300, replace = F,
+              prob = abs(rnorm(length(dates),100, 200))
+              )
+
+dat %&amp;gt;% 
+  enframe() %&amp;gt;% 
+  mutate(year = as.integer(str_sub(value,1,4))) %&amp;gt;% 
+  group_by(year) %&amp;gt;% 
+  count() %&amp;gt;% 
+  ggplot(aes(x = year, y = n)) +
+  geom_col()&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:barplot&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2019-12-07-time-series-data-and-kernel-density_files/figure-html/barplot-1.png&#34; alt=&#34;Number of fictitious judgments between 2000-2020&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Number of fictitious judgments between 2000-2020
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Nothing very special here. However, note that instead of using the actual &lt;em&gt;dates&lt;/em&gt; of the judgments, we sacrifice precision to obtain variation on the y-axis. Often the grouping (temporal) level – year in our case – does not carry any particular meaning beyond the fact that years are readily comprehensible to everyone. Can we do better?&lt;/p&gt;
+&lt;p&gt;Let’s go back to the same data and visualize the date of each judgment. Without any additional variable that could supply variation along a second dimension, I simply fix &lt;em&gt;y = 1&lt;/em&gt; to denote that each judgment is counted, well, once.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dat %&amp;gt;% 
+  enframe() %&amp;gt;% 
+  ggplot(aes(x = value, y = 1)) +
+  geom_point(alpha = 0.1) +
+  theme_bw()&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:dots&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2019-12-07-time-series-data-and-kernel-density_files/figure-html/dots-1.png&#34; alt=&#34;Dates of fictitious judgments between 2000-2020&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 2: Dates of fictitious judgments between 2000-2020
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;The visualization is not very good. Although the x-axis is now a proper continuous timeseries measured in days, there are too many judgments and days in the 20-year period to see clearly any patterns in the data. Increasing the transparency of the data points is a good first step, as darker areas indicate greater &lt;em&gt;density&lt;/em&gt; of judgments around that time.&lt;/p&gt;
+&lt;p&gt;We can exploit the full potential of the dates using the statistical concept of &lt;em&gt;kernel density&lt;/em&gt;. For ease of interpretation, we can think of this as a smoothed histogram. It is very straightforward to implement in &lt;code&gt;ggplot&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dat %&amp;gt;% 
+  enframe() %&amp;gt;% 
+  ggplot(aes(x = value)) +
+  geom_vline(xintercept = as.Date(&amp;quot;2013-01-01&amp;quot;), lty = 2) +
+  annotate(&amp;quot;text&amp;quot;, x = as.Date(&amp;quot;2014-12-31&amp;quot;), y = 0.99, label = &amp;quot;Some event&amp;quot;, fontface = &amp;quot;bold&amp;quot;) +
+  geom_histogram(alpha = 0.1, aes(y = ..ncount..), bins = 40) +
+  stat_density(geom = &amp;quot;line&amp;quot;, adjust = 1/10, kernel = &amp;quot;gaussian&amp;quot;, aes(y = ..scaled..)) +
+  geom_point(alpha = 0.1, y = 0.1) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  labs(x = NULL, y = &amp;quot;Kernel density estimates&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:kde&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2019-12-07-time-series-data-and-kernel-density_files/figure-html/kde-1.png&#34; alt=&#34;Dates of fictitious judgments between 2000-2020 with density estimated&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 3: Dates of fictitious judgments between 2000-2020 with density estimated
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Using &lt;code&gt;stat_density&lt;/code&gt; we get a nice continuous (estimated) timeseries of our data. The idea is to basically treat the time dimension as just a series of numbers over which a continuous distribution of our data can be drawn.&lt;/p&gt;
+&lt;p&gt;Setting &lt;code&gt;y = ..scaled..&lt;/code&gt; scales density to the 0-1 range, which is useful if we want to, for example, compare the kernel density estimates with a histogram that we similarly scale with &lt;code&gt;y = ..ncount..&lt;/code&gt;. Changing &lt;code&gt;adjust&lt;/code&gt; is the simplest way of controlling the smoothing parameter: the lower the value, the less smooth the curve (picks up on more variation). We can similarly adjust the histogram by increasing (decreasing) the number of &lt;code&gt;bins&lt;/code&gt;. There is a variety of methods to calculate kernel density and this is controlled through the &lt;code&gt;kernel&lt;/code&gt; parameter (“gaussian” by default).&lt;/p&gt;
+&lt;p&gt;Although caution is required – we are after all estimating a smoothed curve from discrete data points – I have found kernel density estimation to be a valuable tool for exploring temporal patterns. In most cases it is decisively superior to a bar chart with arbitrarily grouped counts on the y-axis. The below is an example from my PhD thesis where I compare a theoretical model of time variation with a kernel density estimate drawn from submission dates of court cases.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/temporal.png&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pre-processing steps in quantitative text analysis</title>
+      <link>/post/pre-processing-steps-in-quantitative-text-analysis/</link>
+      <pubDate>Sun, 07 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/pre-processing-steps-in-quantitative-text-analysis/</guid>
+      <description>&lt;p&gt;In my work I often resort to topic modelling to summarize otherwise intractable textual corpora. Anyone even vaguely familiar with topic modelling and quantitative text methods more generally will acknowledge that how the raw text is prepared in the run-up to analysis is of critical importance. In a &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3393734&#34; target=&#34;_blank&#34;&gt;recent paper&lt;/a&gt; with my co-authors we tried to document in a simple graph the various steps taken before running a structural topic model. (Interactive plots relating to the paper &lt;a href=&#34;https://euthority.eu/?page_id=660&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Although not all text-data requires this much attention, the graph illustrates the range of possibilities when it comes to pre-processing texts. Credit to Nicolas Lampach for the implementation with &lt;a href=&#34;https://rich-iannone.github.io/DiagrammeR&#34; target=&#34;_blank&#34;&gt;DiagrammeR&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/preprocessing.jpg&#34; alt=&#34;Text pre-processing steps&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;All of the pre-processing was done in R with the following packages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Quality images: &lt;code&gt;magick&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;OCR: &lt;code&gt;tesseract&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Tokenization and data reduction: &lt;code&gt;quanteda&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Language detection: &lt;code&gt;cld2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Spell-checking: &lt;code&gt;hunspell&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Simulating p-values in a 2x2 design</title>
+      <link>/post/simulating-p-values-in-a-2x2-design/</link>
+      <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/simulating-p-values-in-a-2x2-design/</guid>
+      <description>&lt;p&gt;In a recent &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3352467&#34; target=&#34;_blank&#34;&gt;paper&lt;/a&gt; in which I analysed experimental data on law students&amp;rsquo; aversion to politically motivated legal arguments, I realized there was a fairly trivial but systematic relationship between changes in the distribution of outcomes drawn from a binomial distribution in the control group and p-values. For the graphically minded among us (myself) a picture is worth a thousand Greek letters, so below I am including a plot explaining the relationship on simulated data, including the simulation and &lt;code&gt;ggplot2&lt;/code&gt; code. The data concerns a 2x2 contingency matrix (control, treatment x 2 conditions with varying impact on outcome distribution in the control group) and p-values are obtained using Fisher&amp;rsquo;s exact test for count data (one-sided).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
+library(Exact)
+library(ggrepel)
+
+# simulate
+
+set.seed(1923)
+
+n = as.integer(40)
+amb &amp;lt;- seq(0.05,0.50,by=0.05) 
+  
+d &amp;lt;- dbinom(x = 0:n, size = n, prob = amb[1]) %&amp;gt;% 
+  tibble(x = 0:n, n, p = ., amb = amb[1])
+
+for (i in 1:length(amb)){
+  
+  d &amp;lt;- dbinom(x = 0:n, size = n, prob = amb[i]) %&amp;gt;% 
+    tibble(x = 0:n, n, p = ., amb = amb[i]) %&amp;gt;% 
+    bind_rows(d,.)
+  
+}
+
+sampled &amp;lt;- d %&amp;gt;% 
+  sample_n(10, replace = TRUE, weight = p) %&amp;gt;% # increase sample to &amp;gt; 1000
+  rename(b = x) %&amp;gt;% 
+  mutate(a = as.integer(n - b),
+         amb_obs = b/n) %&amp;gt;% 
+  crossing(c = 0:40) %&amp;gt;% 
+  mutate(d = as.integer(n - c)) %&amp;gt;% 
+  rowwise() %&amp;gt;% 
+  mutate(p.value = fisher.test(tibble(j = c(a,c), k = c(b,d)),alternative = &amp;quot;greater&amp;quot;) %&amp;gt;% 
+           broom::tidy() %&amp;gt;% 
+           select(p.value) %&amp;gt;% 
+           deframe())
+
+dat &amp;lt;- sampled %&amp;gt;% 
+  group_by(amb,d) %&amp;gt;% 
+  summarise(p.value = mean(p.value)) %&amp;gt;% 
+  mutate(lbl = ifelse(amb %in% c(0.05,0.50) &amp;amp; p.value &amp;lt; 0.05 &amp;amp; p.value &amp;gt; 0.035,paste(&amp;quot;x = &amp;quot;,d,sep = &amp;quot;&amp;quot;),NA))
+
+# plot
+
+dat %&amp;gt;% 
+  ggplot(aes(x=d, y = p.value, color = amb)) +
+  geom_hline(yintercept = 0.05, color = &amp;quot;grey90&amp;quot;, lty = 2, size = 1.2) +
+  annotate(geom = &amp;quot;text&amp;quot;, x = 35, y = 0.1, label = expression(alpha~&amp;quot; = 0.05&amp;quot;), color = &amp;quot;grey90&amp;quot;, size = 5) +
+  geom_point(alpha = 0.7) +
+  #geom_smooth(aes(y = p.value, color = amb)) +
+  geom_label_repel(aes(label = lbl, x = d, y = p.value),
+                   fontface = &amp;quot;italic&amp;quot;,
+                   segment.color = &amp;quot;grey80&amp;quot;,
+                   segment.alpha = 0.5,
+                   segment.size = 0.8,
+                   nudge_x = ifelse(deframe(na.omit(dat)[,2])&amp;gt;32,2,-3.7),
+                   nudge_y = ifelse(deframe(na.omit(dat)[,2])&amp;gt;32,0.1,-0.03)) +
+  scale_color_distiller(palette = &amp;quot;Spectral&amp;quot;, direction = -1,
+                        limits = c(0.05,0.50),
+                        breaks = c(0.05,0.20,0.35,0.50),
+                        labels = c(0.05,0.20,0.35,0.50)) +
+  theme_minimal() +
+  labs(x = &amp;quot;Number of hypothesis-confirming responses in treatment group&amp;quot;, y = &amp;quot;p-value&amp;quot;, color = &amp;quot;Ambiguity&amp;quot;) +
+  theme(panel.background = element_rect(fill = &amp;quot;grey20&amp;quot;),
+        panel.grid = element_line(color = &amp;quot;grey40&amp;quot;),
+        legend.position = c(0.775,0.72),
+        legend.background = element_blank(),
+        legend.key.size = unit(10,&amp;quot;mm&amp;quot;),
+        legend.text = element_text(color = &amp;quot;grey90&amp;quot;),
+        legend.title = element_text(color = &amp;quot;grey90&amp;quot;, face = &amp;quot;bold&amp;quot;),
+        legend.spacing.y = unit(4,&amp;quot;mm&amp;quot;),
+        legend.box = &amp;quot;horizontal&amp;quot;,
+        legend.direction = &amp;quot;horizontal&amp;quot;,
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_line(color = &amp;quot;grey30&amp;quot;, linetype = 2),
+        panel.grid.major.x = element_line(linetype = 3),
+        panel.grid.minor.x = element_blank()) +
+  guides(color = guide_colourbar(title.position=&amp;quot;top&amp;quot;, title.hjust = 0.5, reverse = F))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/2019-07-05-simulating-p-values-in-a-2x2-design_files/figure-html/unnamed-chunk-1-1.png&#34; alt=&#34;Note the low number of samples makes some lines look crooked. In a real application the number of iterations must be at least 1000. I am skimping on samples here to reduce computation.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Figure 1: Note the low number of samples makes some lines look crooked. In a real application the number of iterations must be at least 1000. I am skimping on samples here to reduce computation.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This little project also made me realize that the spectral color theme looks rather good on a dark background. Although not the most conventional, I will definitely consider darker plot backgrounds in future visualizations.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>From Law to Data (FLAMES course)</title>
+      <link>/post/from-law-to-data-flames-course/</link>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/from-law-to-data-flames-course/</guid>
+      <description>
+
+
+&lt;p&gt;In February 2019 I organized and taught a 12-hour course introducing legal researchers to data analysis. This initiative was born out of the recognition that lawyers’ data skills lagged behind most other disciplines.&lt;/p&gt;
+&lt;p&gt;The class was offered through the &lt;a href=&#34;https://www.flames-statistics.com/courses-seminars/from-law-to-data-a-gentle-introduction-to-data-based-analysis-in-law/&#34;&gt;FLAMES network&lt;/a&gt; which supports methodological training for young researchers at Flemish universities. It proved considerably popular: course registrations reached room capacity (over 50 students) with several more on the waiting list.&lt;/p&gt;
+&lt;p&gt;The course was a first of a kind in Belgium in that it tailored introduction to data analysis to legal research. We faced a number of obstacles in designing and teaching the course:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;our target audience did not have a basic scientific vocabulary (e.g. variables/observations)&lt;/li&gt;
+&lt;li&gt;no/minimal previous methodological or statistical training&lt;/li&gt;
+&lt;li&gt;little interest in empirical research&lt;/li&gt;
+&lt;li&gt;no experience with programming&lt;/li&gt;
+&lt;li&gt;a dearth of continuous variables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The interest in the course demonstrated, however, that a good portion of young legal researchers in Belgium was at least wary of their limited analytical skillset and willing to learn. We were heartened to see the enthusiasm of many students in the class.&lt;/p&gt;
+&lt;p&gt;The course was split in four 3-hour classes which covered roughly the following topics:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Rectangular spreadsheets and manually coding information in Excel&lt;/li&gt;
+&lt;li&gt;First steps in R and importing Excel spreadsheet into R&lt;/li&gt;
+&lt;li&gt;Data wrangling and visualization&lt;/li&gt;
+&lt;li&gt;Reading PDF files, document-term matrices and wordclouds&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We tried combining topics of general data-related importance, such as rectangular spreadsheets and summary statistics, with tools more specifically relevant to lawyers, such as processing text-data from PDF files.&lt;/p&gt;
+&lt;p&gt;In the Excel part we drew heavily on a fantastically useful paper by &lt;a href=&#34;https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1375989&#34;&gt;Broman and Woo (2018)&lt;/a&gt; which catalogues best data organization practices for spreadsheets. The content of this paper was perfectly suited to open our gentle introduction to data analysis.&lt;/p&gt;
+&lt;p&gt;Unlike most R courses we focused in particular on working with binary, categorical and character data, at some cost to continuous and numerical data. This was a conscious choice made with the objective of bringing the course as close as possible to how our target group conducted research.&lt;/p&gt;
+&lt;p&gt;We made &lt;code&gt;tidyverse&lt;/code&gt; functions a core part of the course, although we also introduced &lt;code&gt;base&lt;/code&gt; alternatives. This resulted, among others, in an interesting split between students who quickly took to piping (&lt;code&gt;%&amp;gt;%&lt;/code&gt;) and others who preferred the standard method. The full list of packages used during the course:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(readxl)
+library(writexl)
+library(corrplot)
+library(stargazer)
+library(quanteda)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plotting focused on trends over time, with data filtered, grouped and summarized using the &lt;code&gt;dplyr&lt;/code&gt; toolkit.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;decisions %&amp;gt;%
+  group_by(year) %&amp;gt;%
+  mutate(avg_length = mean(length)) %&amp;gt;%
+  ggplot(aes(x=year,y=avg_length,color=n_judges)) + geom_line() + theme_classic()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-18-from-law-to-data-flames-course_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The course received overall good feedback from the participants. The average rating of the course was 7.9 out of 10. The written feedback brought up the issue of seeing better what R can do. We found it at times a difficult balancing act to demonstrate the very far-reaching capacities of R and teaching the basics of programming. In the future we will present more of the former to stimulate interest in R, as ultimately learning programming hinges a great deal on individual motivation to develop skills outside classroom.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Legal Basis of European Union Laws</title>
+      <link>/data/legal_basis/</link>
+      <pubDate>Sun, 17 Feb 2019 00:00:00 +0200</pubDate>
+      
+      <guid>/data/legal_basis/</guid>
+      <description>
+
+&lt;p&gt;Upon completion, this site will host datasets developed during my PhD project. Three interoperable datasets are envisaged:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Legal basis of EU legislation&lt;/li&gt;
+&lt;li&gt;Legal basis in Commission proposals&lt;/li&gt;
+&lt;li&gt;Legal basis in EU Treaties (manually coded)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;legal-basis-of-eu-legislation&#34;&gt;Legal basis of EU legislation&lt;/h2&gt;
+
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;commission-proposals&#34;&gt;Commission proposals&lt;/h2&gt;
+
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;eu-treaties&#34;&gt;EU Treaties&lt;/h2&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Brexit Negotiation Simulation</title>
+      <link>/post/brexit-negotiation-simulation/</link>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/brexit-negotiation-simulation/</guid>
+      <description>
+
+&lt;p&gt;In October 2017 I ran a tutorial at KU Leuven that simulated the Brexit negotiations as a two-level game &lt;a href=&#34;https://www.jstor.org/stable/2706785?seq=1#page_scan_tab_contents&#34; target=&#34;_blank&#34;&gt;(Putnam 1988)&lt;/a&gt; with mixed-motive bargaining. The Brexit Negotiations Game (BNG) was designed to impart basic understanding of international negotiations to students with a law background in a short space of time (4 hours of preparation, 2 hours in class). The average class size was approximately 20 students. Although the class required extensive preparation (22 individually drafted actor-specific dossiers), it received extremely positive feedback from students.&lt;/p&gt;
+
+&lt;h2 id=&#34;simulation-setup&#34;&gt;Simulation setup&lt;/h2&gt;
+
+&lt;p&gt;The game takes place in the week leading up to the day Brexit materializes, i.e. 29 March 2019. The central objective of the game is to negotiate and ratify the Withdrawal Agreement (WA) on terms viewed as most advantageous by each side, actor and player. This will necessarily entail trade-offs and some players/actors might win more than others (some might even lose out entirely). The interests of some players and actors can overlap to an extent, but no two actors/players share the exact same preferences. Note that for the purposes of the BNG the withdrawal agreement may also contain commitments regarding the future EU-UK (trade) relationship.&lt;/p&gt;
+
+&lt;p&gt;The negotiation of the WA is only successful if both sides also ratify the agreement. As ratification entails specific domestic constraints of which both sides are mindful, the final WA must be such as to satisfy the domestic actors’ preferences in order for them to support its ratification. In the language of Putnam, the win-sets at both Level I and Level II must overlap.&lt;/p&gt;
+
+&lt;h3 id=&#34;actors&#34;&gt;Actors&lt;/h3&gt;
+
+&lt;p&gt;In order to bear out Putnam&amp;rsquo;s two-level game theory in practice, two levels of negotiation were created on both the EU and the UK side.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/two_levels.jpg&#34; alt=&#34;Two levels of negotiation in the simulation&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Each side (EU/UK) consisted of institutional actors which were in turn made up of the individual players. No side and no actor had completely homogenous preferences; players were instructed to pursue their individual preferences (which varied) even within their institution. The extent to which they have done so depended, however, on their negotiating style.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/actors_overview.png&#34; alt=&#34;Sides, actors and players&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;sequencing&#34;&gt;Sequencing&lt;/h3&gt;
+
+&lt;p&gt;The BNG takes place through successive rounds of simultaneous negotiations. Formal negotiations are followed by informal consultations during which information on each side can be exchanged more freely among the actors and the players. During formal negotiation rounds all players must take their designated place at the table of the actor to whom they belong. Each round adheres to a time limit, although formal rounds can be terminated before the expiry of the time limit upon mutual agreement of the players concerned. It will be the responsibility of all actors to observe the time limits for the sake of successfully reaching and ratifying the agreement.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/sequencing.png&#34; alt=&#34;Sequencing of the simulation&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;individual-dossiers&#34;&gt;Individual dossiers&lt;/h3&gt;
+
+&lt;p&gt;Each student received an individual dossier prior to the game. This dossier was confidential and contained player-specific preferences, as well as a brief &amp;lsquo;mission statement&amp;rsquo;. Each player was made aware of a pre-defined menu of options concerning each issue; the domestic preference-forming players had, in addition, an indication of which option they should prefer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/dossier.png&#34; alt=&#34;Example page of an individual dossier&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;negotiated-agreements&#34;&gt;Negotiated agreements&lt;/h2&gt;
+
+&lt;p&gt;In the final phase of the simulation, the negotiating teams (COM/UK GOV) had to draw up a withdrawal agreement, specifying what was agreed on the various issues. The agreement was subsequently put through a ratification process on each side. Only one group did not manage to ratify their agreement.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/BNG.png&#34; alt=&#34;Brexit Withdrawal Agreement as negotiated by 5 groups in October 2017&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;feedback&#34;&gt;Feedback&lt;/h2&gt;
+
+&lt;p&gt;The BNG was part of a tutorial series consisting of 8 tutorials. 73% of students (n = 102) rated the BNG as the best tutorial in the series (10% ranked it second best). On a scale of 1 to 4 (very interesting to not interesting), 57% of students rated the class as very interesting and 27% as interesting (the rest did not provide feedback). When asked which tutorial best focused on developing skills, 83% chose the BNG (as one of two options).&lt;/p&gt;
+
+&lt;p&gt;Essentially all students were happy with the design of the simulation and did not suggest any changes. A few selected remarks from the students (translated from Dutch):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&amp;ldquo;This tutorial was my favorite. I found it very interesting and hope that it will continue to exist in its current form. It was very interesting to prepare and I learned a lot about an issue that is current. It was also exciting to discover which agreement came to the end and whether it would come through. Great tutorial, certainly keep it!&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&amp;ldquo;Extremely interesting format. You could also convey this subject in a very dry way, but by letting us each defend our own position, we first got insight into the difficulties involved in negotiations, certainly in a debate with many different actors, each with their own interests. In addition, we were able to properly capture the complex position of each party. The subject matter also remains very good: I would still be able to explain the positions of the different countries, which would not be the case with an ordinary course.&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&amp;ldquo;I would not change anything. Everything happened in a very smooth way and everyone knew exactly what position he / she had to defend.&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>International Law of Customs Unions: Conceptual Variety, Legal Ambiguity and Diverse Practice</title>
+      <link>/publication/ovadek-2019/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/ovadek-2019/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
