@@ -6,13 +6,13 @@
     <description>Recent content in Homes on Michal Ovádek</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2019 Michal Ovádek</copyright>
+    <copyright>&amp;copy; 2020 Michal Ovádek</copyright>
     
 	    <atom:link href="/home/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Biography</title>
+      <title>About</title>
       <link>/home/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -21,7 +21,7 @@
     </item>
     
     <item>
-      <title>Recent Posts</title>
+      <title>Posts</title>
       <link>/home/posts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -64,7 +64,17 @@
       <guid>/home/teaching/</guid>
       <description>
 
-&lt;p&gt;I teach tutorials and short courses at KU Leuven on a variety of themes in law and politics/IR. In 2019 I launched an effort to popularize data science at Belgian law faculties through the &lt;a href=&#34;https://www.flames-statistics.com/courses-seminars/from-law-to-data-a-gentle-introduction-to-data-based-analysis-in-law/&#34; target=&#34;_blank&#34;&gt;FLAMES network&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;2020&#34;&gt;2020&lt;/h2&gt;
+
+&lt;p&gt;November: Spoke about a &amp;ldquo;New Generation of International Law Databases&amp;rdquo; as part of the Computational and Empirical International Law Speaker Series&lt;/p&gt;
+
+&lt;p&gt;November: Taught a guest lecture about rule of law backsliding in the European Union for students of the Master of European Studies at KU Leuven&lt;/p&gt;
+
+&lt;p&gt;September: Defended my &lt;a href=&#34;https://www.researchgate.net/publication/344270734_The_Law_and_Politics_of_Contested_Competences_in_the_European_Union&#34; target=&#34;_blank&#34;&gt;PhD thesis&lt;/a&gt; on competence contestation in the European Union at KU Leuven&lt;/p&gt;
+
+&lt;p&gt;August: With co-authors presented our research on drivers of state interventions before EU courts as part of the ECPR Law &amp;amp; Courts webinar series&lt;/p&gt;
+
+&lt;p&gt;July: Presented my research on &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3654580&#34; target=&#34;_blank&#34;&gt;estimating the preferences of the European Court of Justice&lt;/a&gt; as part of the ECPR Law &amp;amp; Courts webinar series&lt;/p&gt;
 
 &lt;h2 id=&#34;2019&#34;&gt;2019&lt;/h2&gt;
 
@@ -78,7 +88,7 @@
 
 &lt;p&gt;June: Presented my paper on &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3393734&#34; target=&#34;_blank&#34;&gt;EUSSUE Attention&lt;/a&gt; at Quantitative Text Analysis Workshop in Dublin and EPSA Annual Conference in Belfast&lt;/p&gt;
 
-&lt;p&gt;February: &lt;a href=&#34;https://www.flames-statistics.com/courses-seminars/from-law-to-data-a-gentle-introduction-to-data-based-analysis-in-law/&#34; target=&#34;_blank&#34;&gt;From Law to Data&lt;/a&gt;. A short course introducing data manipulation and analysis in Excel and R.&lt;/p&gt;
+&lt;p&gt;February: &lt;a href=&#34;https://www.flames-statistics.com/courses-seminars/from-law-to-data-a-gentle-introduction-to-data-based-analysis-in-law/&#34; target=&#34;_blank&#34;&gt;From Law to Data&lt;/a&gt;. A short course introducing data manipulation and analysis in Excel and R intended to popularize data science at Belgian law faculties.&lt;/p&gt;
 
 &lt;h2 id=&#34;2018&#34;&gt;2018&lt;/h2&gt;
 
