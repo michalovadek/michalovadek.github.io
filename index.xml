@@ -6,24 +6,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2020 Michal Ovádek</copyright>
-    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>An Economic Theory of Court Performance: Evidence from the Court of Justice of the European Union</title>
-      <link>/publication/yeung-2020/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      <title>The EU and Human Rights: Analysis, Cases, and Materials</title>
+      <link>/publication/wouters-2021/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>/publication/yeung-2020/</guid>
+      <guid>/publication/wouters-2021/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Case Selection in the Preliminary Ruling Procedure</title>
-      <link>/publication/dyevre-2020-c/</link>
+      <title>Bilateral cooperation between the European Union and Mediterranean countries: an introduction to the institutional framework and key issues</title>
+      <link>/publication/wouters-2020-a/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/publication/dyevre-2020-c/</guid>
+      <guid>/publication/wouters-2020-a/</guid>
       <description></description>
     </item>
     
@@ -37,20 +37,20 @@
     </item>
     
     <item>
-      <title>The Voices of European Law: Legislators, Judges and Law Professors</title>
-      <link>/publication/dyevre-2020-a/</link>
+      <title>Procedural Politics Revisited: Institutional Incentives and Jurisdictional Ambiguity in EU Competence Disputes</title>
+      <link>/publication/ovadek-2020-d/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/publication/dyevre-2020-a/</guid>
+      <guid>/publication/ovadek-2020-d/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Uncertainty and Legal Disintegration: Evidence from Brexit</title>
-      <link>/publication/dyevre-2020/</link>
+      <title>Supranationalism, Constrained? Locating the Court of Justice on the EU Integration Dimension</title>
+      <link>/publication/ovadek-2020-c/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/publication/dyevre-2020/</guid>
+      <guid>/publication/ovadek-2020-c/</guid>
       <description></description>
     </item>
     
@@ -73,11 +73,20 @@
     </item>
     
     <item>
-      <title>Who Matters Most? Measuring Importance in the EU Preliminary Reference System</title>
+      <title>Which Courts Matter Most? Measuring Importance in the EU Preliminary Reference System</title>
       <link>/publication/ovadek-2020-b/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/publication/ovadek-2020-b/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>“Popular tribunes” and their agendas: topic modelling Slovak presidents&#39; speeches 1993–2020</title>
+      <link>/publication/ovadek-2020/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/ovadek-2020/</guid>
       <description></description>
     </item>
     
@@ -406,15 +415,6 @@ library(quanteda)&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;p&gt;&amp;ldquo;I would not change anything. Everything happened in a very smooth way and everyone knew exactly what position he / she had to defend.&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>International Law of Customs Unions: Conceptual Variety, Legal Ambiguity and Diverse Practice</title>
-      <link>/publication/ovadek-2019/</link>
-      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/ovadek-2019/</guid>
-      <description></description>
     </item>
     
   </channel>

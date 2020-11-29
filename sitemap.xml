@@ -3,6 +3,77 @@
     
     <url>
     
+      <loc>/publication_types/5/</loc>
+      <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/</loc>
+      <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/jan-wouters/</loc>
+      <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/authors/michal-ov%C3%A1dek/</loc>
+      <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/</loc>
+      <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/publication_types/</loc>
+      <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/publication/</loc>
+      <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/publication/wouters-2021/</loc>
+      <lastmod>2021-01-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/publication_types/2/</loc>
       <lastmod>2020-01-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -21,14 +92,6 @@
     
     <url>
     
-      <loc>/publication/yeung-2020/</loc>
-      <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/authors/arthur-dyevre/</loc>
       <lastmod>2020-01-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -38,16 +101,7 @@
     
     <url>
     
-      <loc>/authors/</loc>
-      <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/publication/dyevre-2020-c/</loc>
+      <loc>/publication/wouters-2020-a/</loc>
       <lastmod>2020-01-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -57,33 +111,6 @@
     
       <loc>/publication/dyevre-2020-b/</loc>
       <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/authors/jan-wouters/</loc>
-      <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/authors/michal-ov%C3%A1dek/</loc>
-      <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/</loc>
-      <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
     </url>
     
   
@@ -108,16 +135,7 @@
     
     <url>
     
-      <loc>/publication_types/</loc>
-      <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/publication/</loc>
+      <loc>/publication/ovadek-2020-d/</loc>
       <lastmod>2020-01-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -125,24 +143,7 @@
     
     <url>
     
-      <loc>/publication/dyevre-2020-a/</loc>
-      <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/authors/timothy-yu-cheong-yeung/</loc>
-      <lastmod>2020-01-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/publication/dyevre-2020/</loc>
+      <loc>/publication/ovadek-2020-c/</loc>
       <lastmod>2020-01-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -176,6 +177,14 @@
     <url>
     
       <loc>/publication/ovadek-2020-b/</loc>
+      <lastmod>2020-01-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/publication/ovadek-2020/</loc>
       <lastmod>2020-01-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -434,14 +443,6 @@
     
     <url>
     
-      <loc>/publication/wouters-2019/</loc>
-      <lastmod>2019-01-01T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/tutorial/example/</loc>
       <lastmod>2018-09-09T00:00:00+02:00</lastmod>
     </url>
@@ -624,6 +625,14 @@
       <loc>/project/</loc>
       <lastmod>2016-04-27T00:00:00+02:00</lastmod>
       <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/publication/ovadek-2016/</loc>
+      <lastmod>2016-01-01T00:00:00+00:00</lastmod>
     </url>
     
   
