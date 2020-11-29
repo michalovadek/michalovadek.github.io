@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>text on Michal Ovádek</title>
+    <link>/tags/text/</link>
+    <description>Recent content in text on Michal Ovádek</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2019 Michal Ovádek</copyright>
+    <lastBuildDate>Sun, 07 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	    <atom:link href="/tags/text/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pre-processing steps in quantitative text analysis</title>
+      <link>/post/pre-processing-steps-in-quantitative-text-analysis/</link>
+      <pubDate>Sun, 07 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/pre-processing-steps-in-quantitative-text-analysis/</guid>
+      <description>&lt;p&gt;In my work I often resort to topic modelling to summarize otherwise intractable textual corpora. Anyone even vaguely familiar with topic modelling and quantitative text methods more generally will acknowledge that how the raw text is prepared in the run-up to analysis is of critical importance. In a &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3393734&#34; target=&#34;_blank&#34;&gt;recent paper&lt;/a&gt; with my co-authors we tried to document in a simple graph the various steps taken before running a structural topic model. (Interactive plots relating to the paper &lt;a href=&#34;https://euthority.eu/?page_id=660&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Although not all text-data requires this much attention, the graph illustrates the range of possibilities when it comes to pre-processing texts. Credit to Nicolas Lampach for the implementation with &lt;a href=&#34;https://rich-iannone.github.io/DiagrammeR&#34; target=&#34;_blank&#34;&gt;DiagrammeR&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/preprocessing.jpg&#34; alt=&#34;Text pre-processing steps&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;All of the pre-processing was done in R with the following packages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Quality images: &lt;code&gt;magick&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;OCR: &lt;code&gt;tesseract&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Tokenization and data reduction: &lt;code&gt;quanteda&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Language detection: &lt;code&gt;cld2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Spell-checking: &lt;code&gt;hunspell&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

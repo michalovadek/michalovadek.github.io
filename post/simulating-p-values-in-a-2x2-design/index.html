@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.3.0">
+  <meta name="generator" content="Hugo 0.55.6" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Michal Ovádek">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="In a recent paper in which I analysed experimental data on law students&rsquo; aversion to politically motivated legal arguments, I realized there was a fairly trivial but systematic relationship between changes in the distribution of outcomes drawn from a binomial distribution in the control group and p-values. For the graphically minded among us (myself) a picture is worth a thousand Greek letters, so below I am including a plot explaining the relationship on simulated data, including the simulation and ggplot2 code.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/simulating-p-values-in-a-2x2-design/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Michal Ovádek">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Michal Ovádek">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/simulating-p-values-in-a-2x2-design/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@michal_ovadek">
+  <meta property="twitter:creator" content="@michal_ovadek">
+  
+  <meta property="og:site_name" content="Michal Ovádek">
+  <meta property="og:url" content="/post/simulating-p-values-in-a-2x2-design/">
+  <meta property="og:title" content="Simulating p-values in a 2x2 design | Michal Ovádek">
+  <meta property="og:description" content="In a recent paper in which I analysed experimental data on law students&rsquo; aversion to politically motivated legal arguments, I realized there was a fairly trivial but systematic relationship between changes in the distribution of outcomes drawn from a binomial distribution in the control group and p-values. For the graphically minded among us (myself) a picture is worth a thousand Greek letters, so below I am including a plot explaining the relationship on simulated data, including the simulation and ggplot2 code."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-07-05T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-07-05T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Simulating p-values in a 2x2 design | Michal Ovádek</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Michal Ovádek</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/publication">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#teaching">
+            
+            <span>Teaching</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/files/cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Simulating p-values in a 2x2 design</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2019-07-05 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-07-05 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Jul 5, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/data/">Data</a>
+    
+  </span>
+  
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Simulating%20p-values%20in%20a%202x2%20design&amp;url=%2fpost%2fsimulating-p-values-in-a-2x2-design%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fsimulating-p-values-in-a-2x2-design%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fsimulating-p-values-in-a-2x2-design%2f&amp;title=Simulating%20p-values%20in%20a%202x2%20design"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fsimulating-p-values-in-a-2x2-design%2f&amp;title=Simulating%20p-values%20in%20a%202x2%20design"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Simulating%20p-values%20in%20a%202x2%20design&amp;body=%2fpost%2fsimulating-p-values-in-a-2x2-design%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      <p>In a recent <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3352467" target="_blank">paper</a> in which I analysed experimental data on law students&rsquo; aversion to politically motivated legal arguments, I realized there was a fairly trivial but systematic relationship between changes in the distribution of outcomes drawn from a binomial distribution in the control group and p-values. For the graphically minded among us (myself) a picture is worth a thousand Greek letters, so below I am including a plot explaining the relationship on simulated data, including the simulation and <code>ggplot2</code> code. The data concerns a 2x2 contingency matrix (control, treatment x 2 conditions with varying impact on outcome distribution in the control group) and p-values are obtained using Fisher&rsquo;s exact test for count data (one-sided).</p>
+
+<pre><code class="language-r">library(tidyverse)
+library(Exact)
+library(ggrepel)
+
+# simulate
+
+set.seed(1923)
+
+n = as.integer(40)
+amb &lt;- seq(0.05,0.50,by=0.05) 
+  
+d &lt;- dbinom(x = 0:n, size = n, prob = amb[1]) %&gt;% 
+  tibble(x = 0:n, n, p = ., amb = amb[1])
+
+for (i in 1:length(amb)){
+  
+  d &lt;- dbinom(x = 0:n, size = n, prob = amb[i]) %&gt;% 
+    tibble(x = 0:n, n, p = ., amb = amb[i]) %&gt;% 
+    bind_rows(d,.)
+  
+}
+
+sampled &lt;- d %&gt;% 
+  sample_n(10, replace = TRUE, weight = p) %&gt;% # increase sample to &gt; 1000
+  rename(b = x) %&gt;% 
+  mutate(a = as.integer(n - b),
+         amb_obs = b/n) %&gt;% 
+  crossing(c = 0:40) %&gt;% 
+  mutate(d = as.integer(n - c)) %&gt;% 
+  rowwise() %&gt;% 
+  mutate(p.value = fisher.test(tibble(j = c(a,c), k = c(b,d)),alternative = &quot;greater&quot;) %&gt;% 
+           broom::tidy() %&gt;% 
+           select(p.value) %&gt;% 
+           deframe())
+
+dat &lt;- sampled %&gt;% 
+  group_by(amb,d) %&gt;% 
+  summarise(p.value = mean(p.value)) %&gt;% 
+  mutate(lbl = ifelse(amb %in% c(0.05,0.50) &amp; p.value &lt; 0.05 &amp; p.value &gt; 0.035,paste(&quot;x = &quot;,d,sep = &quot;&quot;),NA))
+
+# plot
+
+dat %&gt;% 
+  ggplot(aes(x=d, y = p.value, color = amb)) +
+  geom_hline(yintercept = 0.05, color = &quot;grey90&quot;, lty = 2, size = 1.2) +
+  annotate(geom = &quot;text&quot;, x = 35, y = 0.1, label = expression(alpha~&quot; = 0.05&quot;), color = &quot;grey90&quot;, size = 5) +
+  geom_point(alpha = 0.7) +
+  #geom_smooth(aes(y = p.value, color = amb)) +
+  geom_label_repel(aes(label = lbl, x = d, y = p.value),
+                   fontface = &quot;italic&quot;,
+                   segment.color = &quot;grey80&quot;,
+                   segment.alpha = 0.5,
+                   segment.size = 0.8,
+                   nudge_x = ifelse(deframe(na.omit(dat)[,2])&gt;32,2,-3.7),
+                   nudge_y = ifelse(deframe(na.omit(dat)[,2])&gt;32,0.1,-0.03)) +
+  scale_color_distiller(palette = &quot;Spectral&quot;, direction = -1,
+                        limits = c(0.05,0.50),
+                        breaks = c(0.05,0.20,0.35,0.50),
+                        labels = c(0.05,0.20,0.35,0.50)) +
+  theme_minimal() +
+  labs(x = &quot;Number of hypothesis-confirming responses in treatment group&quot;, y = &quot;p-value&quot;, color = &quot;Ambiguity&quot;) +
+  theme(panel.background = element_rect(fill = &quot;grey20&quot;),
+        panel.grid = element_line(color = &quot;grey40&quot;),
+        legend.position = c(0.775,0.72),
+        legend.background = element_blank(),
+        legend.key.size = unit(10,&quot;mm&quot;),
+        legend.text = element_text(color = &quot;grey90&quot;),
+        legend.title = element_text(color = &quot;grey90&quot;, face = &quot;bold&quot;),
+        legend.spacing.y = unit(4,&quot;mm&quot;),
+        legend.box = &quot;horizontal&quot;,
+        legend.direction = &quot;horizontal&quot;,
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_line(color = &quot;grey30&quot;, linetype = 2),
+        panel.grid.major.x = element_line(linetype = 3),
+        panel.grid.minor.x = element_blank()) +
+  guides(color = guide_colourbar(title.position=&quot;top&quot;, title.hjust = 0.5, reverse = F))
+</code></pre>
+
+<div class="figure">
+<img src="/post/2019-07-05-simulating-p-values-in-a-2x2-design_files/figure-html/unnamed-chunk-1-1.png" alt="Note the low number of samples makes some lines look crooked. In a real application the number of iterations must be at least 1000. I am skimping on samples here to reduce computation." width="672" />
+<p class="caption">Figure 1: Note the low number of samples makes some lines look crooked. In a real application the number of iterations must be at least 1000. I am skimping on samples here to reduce computation.</p>
+</div>
+
+<p>This little project also made me realize that the spectral color theme looks rather good on a dark background. Although not the most conventional, I will definitely consider darker plot backgrounds in future visualizations.</p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/data/">data</a>
+  
+  <a class="badge badge-light" href="/tags/rstats/">rstats</a>
+  
+  <a class="badge badge-light" href="/tags/viz/">viz</a>
+  
+</div>
+
+
+
+
+    
+      
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/from-law-to-data-flames-course/">From Law to Data (FLAMES course)</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; 2020 Michal Ovádek &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.07fbebbbf71b021c8836e1d7ecffa489.js"></script>
+
+  </body>
+</html>
+

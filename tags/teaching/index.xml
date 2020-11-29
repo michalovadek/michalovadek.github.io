@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>teaching on Michal Ovádek</title>
+    <link>/tags/teaching/</link>
+    <description>Recent content in teaching on Michal Ovádek</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2020 Michal Ovádek</copyright>
+    <lastBuildDate>Mon, 18 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	    <atom:link href="/tags/teaching/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>From Law to Data (FLAMES course)</title>
+      <link>/post/from-law-to-data-flames-course/</link>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/from-law-to-data-flames-course/</guid>
+      <description>
+
+
+&lt;p&gt;In February 2019 I organized and taught a 12-hour course introducing legal researchers to data analysis. This initiative was born out of the recognition that lawyers’ data skills lagged behind most other disciplines.&lt;/p&gt;
+&lt;p&gt;The class was offered through the &lt;a href=&#34;https://www.flames-statistics.com/courses-seminars/from-law-to-data-a-gentle-introduction-to-data-based-analysis-in-law/&#34;&gt;FLAMES network&lt;/a&gt; which supports methodological training for young researchers at Flemish universities. It proved considerably popular: course registrations reached room capacity (over 50 students) with several more on the waiting list.&lt;/p&gt;
+&lt;p&gt;The course was a first of a kind in Belgium in that it tailored introduction to data analysis to legal research. We faced a number of obstacles in designing and teaching the course:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;our target audience did not have a basic scientific vocabulary (e.g. variables/observations)&lt;/li&gt;
+&lt;li&gt;no/minimal previous methodological or statistical training&lt;/li&gt;
+&lt;li&gt;little interest in empirical research&lt;/li&gt;
+&lt;li&gt;no experience with programming&lt;/li&gt;
+&lt;li&gt;a dearth of continuous variables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The interest in the course demonstrated, however, that a good portion of young legal researchers in Belgium was at least wary of their limited analytical skillset and willing to learn. We were heartened to see the enthusiasm of many students in the class.&lt;/p&gt;
+&lt;p&gt;The course was split in four 3-hour classes which covered roughly the following topics:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Rectangular spreadsheets and manually coding information in Excel&lt;/li&gt;
+&lt;li&gt;First steps in R and importing Excel spreadsheet into R&lt;/li&gt;
+&lt;li&gt;Data wrangling and visualization&lt;/li&gt;
+&lt;li&gt;Reading PDF files, document-term matrices and wordclouds&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We tried combining topics of general data-related importance, such as rectangular spreadsheets and summary statistics, with tools more specifically relevant to lawyers, such as processing text-data from PDF files.&lt;/p&gt;
+&lt;p&gt;In the Excel part we drew heavily on a fantastically useful paper by &lt;a href=&#34;https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1375989&#34;&gt;Broman and Woo (2018)&lt;/a&gt; which catalogues best data organization practices for spreadsheets. The content of this paper was perfectly suited to open our gentle introduction to data analysis.&lt;/p&gt;
+&lt;p&gt;Unlike most R courses we focused in particular on working with binary, categorical and character data, at some cost to continuous and numerical data. This was a conscious choice made with the objective of bringing the course as close as possible to how our target group conducted research.&lt;/p&gt;
+&lt;p&gt;We made &lt;code&gt;tidyverse&lt;/code&gt; functions a core part of the course, although we also introduced &lt;code&gt;base&lt;/code&gt; alternatives. This resulted, among others, in an interesting split between students who quickly took to piping (&lt;code&gt;%&amp;gt;%&lt;/code&gt;) and others who preferred the standard method. The full list of packages used during the course:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(readxl)
+library(writexl)
+library(corrplot)
+library(stargazer)
+library(quanteda)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plotting focused on trends over time, with data filtered, grouped and summarized using the &lt;code&gt;dplyr&lt;/code&gt; toolkit.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;decisions %&amp;gt;%
+  group_by(year) %&amp;gt;%
+  mutate(avg_length = mean(length)) %&amp;gt;%
+  ggplot(aes(x=year,y=avg_length,color=n_judges)) + geom_line() + theme_classic()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-18-from-law-to-data-flames-course_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The course received overall good feedback from the participants. The average rating of the course was 7.9 out of 10. The written feedback brought up the issue of seeing better what R can do. We found it at times a difficult balancing act to demonstrate the very far-reaching capacities of R and teaching the basics of programming. In the future we will present more of the former to stimulate interest in R, as ultimately learning programming hinges a great deal on individual motivation to develop skills outside classroom.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Brexit Negotiation Simulation</title>
+      <link>/post/brexit-negotiation-simulation/</link>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/brexit-negotiation-simulation/</guid>
+      <description>
+
+&lt;p&gt;In October 2017 I ran a tutorial at KU Leuven that simulated the Brexit negotiations as a two-level game &lt;a href=&#34;https://www.jstor.org/stable/2706785?seq=1#page_scan_tab_contents&#34; target=&#34;_blank&#34;&gt;(Putnam 1988)&lt;/a&gt; with mixed-motive bargaining. The Brexit Negotiations Game (BNG) was designed to impart basic understanding of international negotiations to students with a law background in a short space of time (4 hours of preparation, 2 hours in class). The average class size was approximately 20 students. Although the class required extensive preparation (22 individually drafted actor-specific dossiers), it received extremely positive feedback from students.&lt;/p&gt;
+
+&lt;h2 id=&#34;simulation-setup&#34;&gt;Simulation setup&lt;/h2&gt;
+
+&lt;p&gt;The game takes place in the week leading up to the day Brexit materializes, i.e. 29 March 2019. The central objective of the game is to negotiate and ratify the Withdrawal Agreement (WA) on terms viewed as most advantageous by each side, actor and player. This will necessarily entail trade-offs and some players/actors might win more than others (some might even lose out entirely). The interests of some players and actors can overlap to an extent, but no two actors/players share the exact same preferences. Note that for the purposes of the BNG the withdrawal agreement may also contain commitments regarding the future EU-UK (trade) relationship.&lt;/p&gt;
+
+&lt;p&gt;The negotiation of the WA is only successful if both sides also ratify the agreement. As ratification entails specific domestic constraints of which both sides are mindful, the final WA must be such as to satisfy the domestic actors’ preferences in order for them to support its ratification. In the language of Putnam, the win-sets at both Level I and Level II must overlap.&lt;/p&gt;
+
+&lt;h3 id=&#34;actors&#34;&gt;Actors&lt;/h3&gt;
+
+&lt;p&gt;In order to bear out Putnam&amp;rsquo;s two-level game theory in practice, two levels of negotiation were created on both the EU and the UK side.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/two_levels.jpg&#34; alt=&#34;Two levels of negotiation in the simulation&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Each side (EU/UK) consisted of institutional actors which were in turn made up of the individual players. No side and no actor had completely homogenous preferences; players were instructed to pursue their individual preferences (which varied) even within their institution. The extent to which they have done so depended, however, on their negotiating style.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/actors_overview.png&#34; alt=&#34;Sides, actors and players&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;sequencing&#34;&gt;Sequencing&lt;/h3&gt;
+
+&lt;p&gt;The BNG takes place through successive rounds of simultaneous negotiations. Formal negotiations are followed by informal consultations during which information on each side can be exchanged more freely among the actors and the players. During formal negotiation rounds all players must take their designated place at the table of the actor to whom they belong. Each round adheres to a time limit, although formal rounds can be terminated before the expiry of the time limit upon mutual agreement of the players concerned. It will be the responsibility of all actors to observe the time limits for the sake of successfully reaching and ratifying the agreement.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/sequencing.png&#34; alt=&#34;Sequencing of the simulation&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;individual-dossiers&#34;&gt;Individual dossiers&lt;/h3&gt;
+
+&lt;p&gt;Each student received an individual dossier prior to the game. This dossier was confidential and contained player-specific preferences, as well as a brief &amp;lsquo;mission statement&amp;rsquo;. Each player was made aware of a pre-defined menu of options concerning each issue; the domestic preference-forming players had, in addition, an indication of which option they should prefer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/dossier.png&#34; alt=&#34;Example page of an individual dossier&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;negotiated-agreements&#34;&gt;Negotiated agreements&lt;/h2&gt;
+
+&lt;p&gt;In the final phase of the simulation, the negotiating teams (COM/UK GOV) had to draw up a withdrawal agreement, specifying what was agreed on the various issues. The agreement was subsequently put through a ratification process on each side. Only one group did not manage to ratify their agreement.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/BNG.png&#34; alt=&#34;Brexit Withdrawal Agreement as negotiated by 5 groups in October 2017&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;feedback&#34;&gt;Feedback&lt;/h2&gt;
+
+&lt;p&gt;The BNG was part of a tutorial series consisting of 8 tutorials. 73% of students (n = 102) rated the BNG as the best tutorial in the series (10% ranked it second best). On a scale of 1 to 4 (very interesting to not interesting), 57% of students rated the class as very interesting and 27% as interesting (the rest did not provide feedback). When asked which tutorial best focused on developing skills, 83% chose the BNG (as one of two options).&lt;/p&gt;
+
+&lt;p&gt;Essentially all students were happy with the design of the simulation and did not suggest any changes. A few selected remarks from the students (translated from Dutch):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&amp;ldquo;This tutorial was my favorite. I found it very interesting and hope that it will continue to exist in its current form. It was very interesting to prepare and I learned a lot about an issue that is current. It was also exciting to discover which agreement came to the end and whether it would come through. Great tutorial, certainly keep it!&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&amp;ldquo;Extremely interesting format. You could also convey this subject in a very dry way, but by letting us each defend our own position, we first got insight into the difficulties involved in negotiations, certainly in a debate with many different actors, each with their own interests. In addition, we were able to properly capture the complex position of each party. The subject matter also remains very good: I would still be able to explain the positions of the different countries, which would not be the case with an ordinary course.&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&amp;ldquo;I would not change anything. Everything happened in a very smooth way and everyone knew exactly what position he / she had to defend.&amp;rdquo;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
