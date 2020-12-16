@@ -83,13 +83,13 @@ library(quanteda)&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Each side (EU/UK) consisted of institutional actors which were in turn made up of the individual players. No side and no actor had completely homogenous preferences; players were instructed to pursue their individual preferences (which varied) even within their institution. The extent to which they have done so depended, however, on their negotiating style.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/actors_overview.png&#34; alt=&#34;Sides, actors and players&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/actors_overview.jpg&#34; alt=&#34;Sides, actors and players&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;sequencing&#34;&gt;Sequencing&lt;/h3&gt;
 
 &lt;p&gt;The BNG takes place through successive rounds of simultaneous negotiations. Formal negotiations are followed by informal consultations during which information on each side can be exchanged more freely among the actors and the players. During formal negotiation rounds all players must take their designated place at the table of the actor to whom they belong. Each round adheres to a time limit, although formal rounds can be terminated before the expiry of the time limit upon mutual agreement of the players concerned. It will be the responsibility of all actors to observe the time limits for the sake of successfully reaching and ratifying the agreement.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;/img/sequencing.png&#34; alt=&#34;Sequencing of the simulation&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/sequencing.jpg&#34; alt=&#34;Sequencing of the simulation&#34; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&#34;individual-dossiers&#34;&gt;Individual dossiers&lt;/h3&gt;
 
