@@ -74,6 +74,95 @@
     
     <url>
     
+      <loc>/categories/</loc>
+      <lastmod>2020-12-16T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/categories/data/</loc>
+      <lastmod>2020-12-16T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/eu/</loc>
+      <lastmod>2020-12-16T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/</loc>
+      <lastmod>2020-12-16T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/</loc>
+      <lastmod>2020-12-16T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/post/the-eurlex-r-package/</loc>
+      <lastmod>2020-12-16T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/data/</loc>
+      <lastmod>2020-12-16T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/eurlex/</loc>
+      <lastmod>2020-12-16T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/law/</loc>
+      <lastmod>2020-12-16T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/tags/rstats/</loc>
+      <lastmod>2020-12-16T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/publication_types/2/</loc>
       <lastmod>2020-01-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -192,24 +281,6 @@
     
     <url>
     
-      <loc>/categories/</loc>
-      <lastmod>2019-12-07T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/categories/data/</loc>
-      <lastmod>2019-12-07T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/post/time-series-data-and-kernel-density/</loc>
       <lastmod>2019-12-07T00:00:00+00:00</lastmod>
     </url>
@@ -218,34 +289,7 @@
     
     <url>
     
-      <loc>/post/</loc>
-      <lastmod>2019-12-07T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/</loc>
-      <lastmod>2019-12-07T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/tags/kernel-density/</loc>
-      <lastmod>2019-12-07T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/rstats/</loc>
       <lastmod>2019-12-07T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -280,15 +324,6 @@
     
     <url>
     
-      <loc>/tags/data/</loc>
-      <lastmod>2019-07-07T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
       <loc>/tags/text/</loc>
       <lastmod>2019-07-07T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -315,15 +350,6 @@
     <url>
     
       <loc>/categories/teaching/</loc>
-      <lastmod>2019-02-18T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/law/</loc>
       <lastmod>2019-02-18T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -485,15 +511,6 @@
     <url>
     
       <loc>/tags/ecj/</loc>
-      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/eu/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
