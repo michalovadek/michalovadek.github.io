@@ -5,9 +5,45 @@
     <description>Recent content in Michal Ovádek on Michal Ovádek</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2020 Michal Ovádek</copyright>
+    <copyright>&amp;copy; 2021 Michal Ovádek</copyright>
     <lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Analysing EU Treaty-Making and Litigation with Network Analysis and Natural Language Processing</title>
+      <link>/publication/ovadek-2021-c/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/ovadek-2021-c/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Facilitating access to data on European Union laws</title>
+      <link>/publication/ovadek-2021/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/ovadek-2021/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Procedural Politics Revisited: Institutional Incentives and Jurisdictional Ambiguity in EU Competence Disputes</title>
+      <link>/publication/ovadek-2021-a/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/ovadek-2021-a/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Supranationalism, Constrained? Locating the Court of Justice on the EU Integration Dimension</title>
+      <link>/publication/ovadek-2021-b/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/ovadek-2021-b/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>The EU and Human Rights: Analysis, Cases, and Materials</title>
@@ -15,6 +51,15 @@
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>/publication/wouters-2021/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The Voices of European Law: Legislators, Judges and Law Professors</title>
+      <link>/publication/dyevre-2021/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/dyevre-2021/</guid>
       <description></description>
     </item>
     
@@ -94,7 +139,7 @@ query_dir &amp;lt;- elx_make_query(resource_type = &amp;quot;directive&amp;quot;
 # elx_make_query(&amp;quot;directive&amp;quot;) %&amp;gt;% 
 #   elx_run_query()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;as_tibble(results)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 4,314 x 3
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4,319 x 3
 ##    work                                  type                            celex  
 ##    &amp;lt;chr&amp;gt;                                 &amp;lt;chr&amp;gt;                           &amp;lt;chr&amp;gt;  
 ##  1 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31979L~
@@ -107,7 +152,7 @@ query_dir &amp;lt;- elx_make_query(resource_type = &amp;quot;directive&amp;quot;
 ##  8 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31966L~
 ##  9 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31974L~
 ## 10 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31982L~
-## # ... with 4,304 more rows&lt;/code&gt;&lt;/pre&gt;
+## # ... with 4,309 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The function outputs a &lt;code&gt;data.frame&lt;/code&gt; where each column corresponds to one of the requested variables, while the rows accumulate observations of the resource type satisfying the query criteria. Obviously, the more data is to be returned, the longer the execution time, varying from a few seconds to several minutes, depending also on your connection.&lt;/p&gt;
 &lt;p&gt;The first column always contains the unique URI of a “work” (legislative act or court judgment) which identifies each resource in Cellar. Several human-readable identifiers are normally associated with each “work” but the most useful one is CELEX, retrieved by default.&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;One column you should always pay attention to is &lt;code&gt;type&lt;/code&gt; (as in &lt;code&gt;resource_type&lt;/code&gt;). The URIs contained there reflect the FILTER argument in the SPARQL query, which is manually pre-specified. All resources are indexed as being of one type or another. For example, when retrieving directives, the results are going to return also delegated directives, which might not be desirable, depending on your needs. You can filter results by &lt;code&gt;type&lt;/code&gt; to make the necessary adjustments. The queries are expansive by default in the spirit of erring on the side of over-inclusiveness rather than vice versa.&lt;/p&gt;
@@ -317,28 +362,19 @@ dirs_1970_title %&amp;gt;%
     
     <item>
       <title>Experimental Legal Methods in the Classroom</title>
-      <link>/publication/dyevre-2020-b/</link>
+      <link>/publication/dyevre-2020/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/publication/dyevre-2020-b/</guid>
+      <guid>/publication/dyevre-2020/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Procedural Politics Revisited: Institutional Incentives and Jurisdictional Ambiguity in EU Competence Disputes</title>
-      <link>/publication/ovadek-2020-d/</link>
+      <title>Popular tribunes and their agendas: topic modelling Slovak presidents&#39; speeches 1993-2020</title>
+      <link>/publication/ovadek-2020/</link>
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/publication/ovadek-2020-d/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Supranationalism, Constrained? Locating the Court of Justice on the EU Integration Dimension</title>
-      <link>/publication/ovadek-2020-c/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/ovadek-2020-c/</guid>
+      <guid>/publication/ovadek-2020/</guid>
       <description></description>
     </item>
     
@@ -366,15 +402,6 @@ dirs_1970_title %&amp;gt;%
       <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>/publication/ovadek-2020-b/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>“Popular tribunes” and their agendas: topic modelling Slovak presidents&#39; speeches 1993–2020</title>
-      <link>/publication/ovadek-2020/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/ovadek-2020/</guid>
       <description></description>
     </item>
     
@@ -472,176 +499,6 @@ Figure 3: Dates of fictitious judgments between 2000-2020 with density estimated
 &lt;li&gt;Language detection: &lt;code&gt;cld2&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Spell-checking: &lt;code&gt;hunspell&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Simulating p-values in a 2x2 design</title>
-      <link>/post/simulating-p-values-in-a-2x2-design/</link>
-      <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/simulating-p-values-in-a-2x2-design/</guid>
-      <description>&lt;p&gt;In a recent &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3352467&#34; target=&#34;_blank&#34;&gt;paper&lt;/a&gt; in which I analysed experimental data on law students&amp;rsquo; aversion to politically motivated legal arguments, I realized there was a fairly trivial but systematic relationship between changes in the distribution of outcomes drawn from a binomial distribution in the control group and p-values. For the graphically minded among us (myself) a picture is worth a thousand Greek letters, so below I am including a plot explaining the relationship on simulated data, including the simulation and &lt;code&gt;ggplot2&lt;/code&gt; code. The data concerns a 2x2 contingency matrix (control, treatment x 2 conditions with varying impact on outcome distribution in the control group) and p-values are obtained using Fisher&amp;rsquo;s exact test for count data (one-sided).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
-library(Exact)
-library(ggrepel)
-
-# simulate
-
-set.seed(1923)
-
-n = as.integer(40)
-amb &amp;lt;- seq(0.05,0.50,by=0.05) 
-  
-d &amp;lt;- dbinom(x = 0:n, size = n, prob = amb[1]) %&amp;gt;% 
-  tibble(x = 0:n, n, p = ., amb = amb[1])
-
-for (i in 1:length(amb)){
-  
-  d &amp;lt;- dbinom(x = 0:n, size = n, prob = amb[i]) %&amp;gt;% 
-    tibble(x = 0:n, n, p = ., amb = amb[i]) %&amp;gt;% 
-    bind_rows(d,.)
-  
-}
-
-sampled &amp;lt;- d %&amp;gt;% 
-  sample_n(10, replace = TRUE, weight = p) %&amp;gt;% # increase sample to &amp;gt; 1000
-  rename(b = x) %&amp;gt;% 
-  mutate(a = as.integer(n - b),
-         amb_obs = b/n) %&amp;gt;% 
-  crossing(c = 0:40) %&amp;gt;% 
-  mutate(d = as.integer(n - c)) %&amp;gt;% 
-  rowwise() %&amp;gt;% 
-  mutate(p.value = fisher.test(tibble(j = c(a,c), k = c(b,d)),alternative = &amp;quot;greater&amp;quot;) %&amp;gt;% 
-           broom::tidy() %&amp;gt;% 
-           select(p.value) %&amp;gt;% 
-           deframe())
-
-dat &amp;lt;- sampled %&amp;gt;% 
-  group_by(amb,d) %&amp;gt;% 
-  summarise(p.value = mean(p.value)) %&amp;gt;% 
-  mutate(lbl = ifelse(amb %in% c(0.05,0.50) &amp;amp; p.value &amp;lt; 0.05 &amp;amp; p.value &amp;gt; 0.035,paste(&amp;quot;x = &amp;quot;,d,sep = &amp;quot;&amp;quot;),NA))
-
-# plot
-
-dat %&amp;gt;% 
-  ggplot(aes(x=d, y = p.value, color = amb)) +
-  geom_hline(yintercept = 0.05, color = &amp;quot;grey90&amp;quot;, lty = 2, size = 1.2) +
-  annotate(geom = &amp;quot;text&amp;quot;, x = 35, y = 0.1, label = expression(alpha~&amp;quot; = 0.05&amp;quot;), color = &amp;quot;grey90&amp;quot;, size = 5) +
-  geom_point(alpha = 0.7) +
-  #geom_smooth(aes(y = p.value, color = amb)) +
-  geom_label_repel(aes(label = lbl, x = d, y = p.value),
-                   fontface = &amp;quot;italic&amp;quot;,
-                   segment.color = &amp;quot;grey80&amp;quot;,
-                   segment.alpha = 0.5,
-                   segment.size = 0.8,
-                   nudge_x = ifelse(deframe(na.omit(dat)[,2])&amp;gt;32,2,-3.7),
-                   nudge_y = ifelse(deframe(na.omit(dat)[,2])&amp;gt;32,0.1,-0.03)) +
-  scale_color_distiller(palette = &amp;quot;Spectral&amp;quot;, direction = -1,
-                        limits = c(0.05,0.50),
-                        breaks = c(0.05,0.20,0.35,0.50),
-                        labels = c(0.05,0.20,0.35,0.50)) +
-  theme_minimal() +
-  labs(x = &amp;quot;Number of hypothesis-confirming responses in treatment group&amp;quot;, y = &amp;quot;p-value&amp;quot;, color = &amp;quot;Ambiguity&amp;quot;) +
-  theme(panel.background = element_rect(fill = &amp;quot;grey20&amp;quot;),
-        panel.grid = element_line(color = &amp;quot;grey40&amp;quot;),
-        legend.position = c(0.775,0.72),
-        legend.background = element_blank(),
-        legend.key.size = unit(10,&amp;quot;mm&amp;quot;),
-        legend.text = element_text(color = &amp;quot;grey90&amp;quot;),
-        legend.title = element_text(color = &amp;quot;grey90&amp;quot;, face = &amp;quot;bold&amp;quot;),
-        legend.spacing.y = unit(4,&amp;quot;mm&amp;quot;),
-        legend.box = &amp;quot;horizontal&amp;quot;,
-        legend.direction = &amp;quot;horizontal&amp;quot;,
-        panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_line(color = &amp;quot;grey30&amp;quot;, linetype = 2),
-        panel.grid.major.x = element_line(linetype = 3),
-        panel.grid.minor.x = element_blank()) +
-  guides(color = guide_colourbar(title.position=&amp;quot;top&amp;quot;, title.hjust = 0.5, reverse = F))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;/post/2019-07-05-simulating-p-values-in-a-2x2-design_files/figure-html/unnamed-chunk-1-1.png&#34; alt=&#34;Note the low number of samples makes some lines look crooked. In a real application the number of iterations must be at least 1000. I am skimping on samples here to reduce computation.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Figure 1: Note the low number of samples makes some lines look crooked. In a real application the number of iterations must be at least 1000. I am skimping on samples here to reduce computation.&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This little project also made me realize that the spectral color theme looks rather good on a dark background. Although not the most conventional, I will definitely consider darker plot backgrounds in future visualizations.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>From Law to Data (FLAMES course)</title>
-      <link>/post/from-law-to-data-flames-course/</link>
-      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/from-law-to-data-flames-course/</guid>
-      <description>
-
-
-&lt;p&gt;In February 2019 I organized and taught a 12-hour course introducing legal researchers to data analysis. This initiative was born out of the recognition that lawyers’ data skills lagged behind most other disciplines.&lt;/p&gt;
-&lt;p&gt;The class was offered through the &lt;a href=&#34;https://www.flames-statistics.com/courses-seminars/from-law-to-data-a-gentle-introduction-to-data-based-analysis-in-law/&#34;&gt;FLAMES network&lt;/a&gt; which supports methodological training for young researchers at Flemish universities. It proved considerably popular: course registrations reached room capacity (over 50 students) with several more on the waiting list.&lt;/p&gt;
-&lt;p&gt;The course was a first of a kind in Belgium in that it tailored introduction to data analysis to legal research. We faced a number of obstacles in designing and teaching the course:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;our target audience did not have a basic scientific vocabulary (e.g. variables/observations)&lt;/li&gt;
-&lt;li&gt;no/minimal previous methodological or statistical training&lt;/li&gt;
-&lt;li&gt;little interest in empirical research&lt;/li&gt;
-&lt;li&gt;no experience with programming&lt;/li&gt;
-&lt;li&gt;a dearth of continuous variables&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The interest in the course demonstrated, however, that a good portion of young legal researchers in Belgium was at least wary of their limited analytical skillset and willing to learn. We were heartened to see the enthusiasm of many students in the class.&lt;/p&gt;
-&lt;p&gt;The course was split in four 3-hour classes which covered roughly the following topics:&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Rectangular spreadsheets and manually coding information in Excel&lt;/li&gt;
-&lt;li&gt;First steps in R and importing Excel spreadsheet into R&lt;/li&gt;
-&lt;li&gt;Data wrangling and visualization&lt;/li&gt;
-&lt;li&gt;Reading PDF files, document-term matrices and wordclouds&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;We tried combining topics of general data-related importance, such as rectangular spreadsheets and summary statistics, with tools more specifically relevant to lawyers, such as processing text-data from PDF files.&lt;/p&gt;
-&lt;p&gt;In the Excel part we drew heavily on a fantastically useful paper by &lt;a href=&#34;https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1375989&#34;&gt;Broman and Woo (2018)&lt;/a&gt; which catalogues best data organization practices for spreadsheets. The content of this paper was perfectly suited to open our gentle introduction to data analysis.&lt;/p&gt;
-&lt;p&gt;Unlike most R courses we focused in particular on working with binary, categorical and character data, at some cost to continuous and numerical data. This was a conscious choice made with the objective of bringing the course as close as possible to how our target group conducted research.&lt;/p&gt;
-&lt;p&gt;We made &lt;code&gt;tidyverse&lt;/code&gt; functions a core part of the course, although we also introduced &lt;code&gt;base&lt;/code&gt; alternatives. This resulted, among others, in an interesting split between students who quickly took to piping (&lt;code&gt;%&amp;gt;%&lt;/code&gt;) and others who preferred the standard method. The full list of packages used during the course:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
-library(readxl)
-library(writexl)
-library(corrplot)
-library(stargazer)
-library(quanteda)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Plotting focused on trends over time, with data filtered, grouped and summarized using the &lt;code&gt;dplyr&lt;/code&gt; toolkit.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;decisions %&amp;gt;%
-  group_by(year) %&amp;gt;%
-  mutate(avg_length = mean(length)) %&amp;gt;%
-  ggplot(aes(x=year,y=avg_length,color=n_judges)) + geom_line() + theme_classic()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2019-02-18-from-law-to-data-flames-course_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;The course received overall good feedback from the participants. The average rating of the course was 7.9 out of 10. The written feedback brought up the issue of seeing better what R can do. We found it at times a difficult balancing act to demonstrate the very far-reaching capacities of R and teaching the basics of programming. In the future we will present more of the former to stimulate interest in R, as ultimately learning programming hinges a great deal on individual motivation to develop skills outside classroom.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Legal Basis of European Union Laws</title>
-      <link>/data/legal_basis/</link>
-      <pubDate>Sun, 17 Feb 2019 00:00:00 +0200</pubDate>
-      
-      <guid>/data/legal_basis/</guid>
-      <description>
-
-&lt;p&gt;Upon completion, this site will host datasets developed during my PhD project. Three interoperable datasets are envisaged:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Legal basis of EU legislation&lt;/li&gt;
-&lt;li&gt;Legal basis in Commission proposals&lt;/li&gt;
-&lt;li&gt;Legal basis in EU Treaties (manually coded)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;legal-basis-of-eu-legislation&#34;&gt;Legal basis of EU legislation&lt;/h2&gt;
-
-&lt;p&gt;&amp;hellip;&lt;/p&gt;
-
-&lt;h2 id=&#34;commission-proposals&#34;&gt;Commission proposals&lt;/h2&gt;
-
-&lt;p&gt;&amp;hellip;&lt;/p&gt;
-
-&lt;h2 id=&#34;eu-treaties&#34;&gt;EU Treaties&lt;/h2&gt;
 </description>
     </item>
     

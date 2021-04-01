@@ -6,11 +6,20 @@
     <description>Recent content in Publication_types on Michal Ovádek</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2020 Michal Ovádek</copyright>
+    <copyright>&amp;copy; 2021 Michal Ovádek</copyright>
     <lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/publication_types/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2</title>
+      <link>/publication_types/2/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/publication_types/2/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>5</title>
@@ -18,15 +27,6 @@
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>/publication_types/5/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>2</title>
-      <link>/publication_types/2/</link>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/publication_types/2/</guid>
       <description></description>
     </item>
     

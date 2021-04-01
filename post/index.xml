@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Michal Ovádek</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2020 Michal Ovádek</copyright>
+    <copyright>&amp;copy; 2021 Michal Ovádek</copyright>
     <lastBuildDate>Wed, 16 Dec 2020 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
@@ -88,7 +88,7 @@ query_dir &amp;lt;- elx_make_query(resource_type = &amp;quot;directive&amp;quot;
 # elx_make_query(&amp;quot;directive&amp;quot;) %&amp;gt;% 
 #   elx_run_query()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;as_tibble(results)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 4,314 x 3
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4,319 x 3
 ##    work                                  type                            celex  
 ##    &amp;lt;chr&amp;gt;                                 &amp;lt;chr&amp;gt;                           &amp;lt;chr&amp;gt;  
 ##  1 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31979L~
@@ -101,7 +101,7 @@ query_dir &amp;lt;- elx_make_query(resource_type = &amp;quot;directive&amp;quot;
 ##  8 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31966L~
 ##  9 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31974L~
 ## 10 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31982L~
-## # ... with 4,304 more rows&lt;/code&gt;&lt;/pre&gt;
+## # ... with 4,309 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The function outputs a &lt;code&gt;data.frame&lt;/code&gt; where each column corresponds to one of the requested variables, while the rows accumulate observations of the resource type satisfying the query criteria. Obviously, the more data is to be returned, the longer the execution time, varying from a few seconds to several minutes, depending also on your connection.&lt;/p&gt;
 &lt;p&gt;The first column always contains the unique URI of a “work” (legislative act or court judgment) which identifies each resource in Cellar. Several human-readable identifiers are normally associated with each “work” but the most useful one is CELEX, retrieved by default.&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;One column you should always pay attention to is &lt;code&gt;type&lt;/code&gt; (as in &lt;code&gt;resource_type&lt;/code&gt;). The URIs contained there reflect the FILTER argument in the SPARQL query, which is manually pre-specified. All resources are indexed as being of one type or another. For example, when retrieving directives, the results are going to return also delegated directives, which might not be desirable, depending on your needs. You can filter results by &lt;code&gt;type&lt;/code&gt; to make the necessary adjustments. The queries are expansive by default in the spirit of erring on the side of over-inclusiveness rather than vice versa.&lt;/p&gt;
