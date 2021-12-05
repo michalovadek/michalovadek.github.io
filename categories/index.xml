@@ -1,34 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Michal Ovádek</title>
-    <link>/categories/</link>
-    <description>Recent content in Categories on Michal Ovádek</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2021 Michal Ovádek</copyright>
-    <lastBuildDate>Wed, 16 Dec 2020 00:00:00 +0000</lastBuildDate>
-    
-	    <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Data</title>
-      <link>/categories/data/</link>
-      <pubDate>Wed, 16 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/data/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Teaching</title>
-      <link>/categories/teaching/</link>
-      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/teaching/</guid>
-      <description></description>
-    </item>
+    <title>Categories | Michal Ovádek</title>
+    <link>https://michalovadek.github.io/categories/</link>
+      <atom:link href="https://michalovadek.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <description>Categories</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Michal Ovádek</copyright><lastBuildDate>Sun, 05 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://michalovadek.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Categories</title>
+      <link>https://michalovadek.github.io/categories/</link>
+    </image>
     
   </channel>
 </rss>

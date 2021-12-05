@@ -1,0 +1,1477 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Michal Ovádek" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Dozens of political scientists and legal scholars use data on European Union laws in their research. The provenance of these data is rarely discussed. More often than not, researchers resort to the quick and dirty technique of scraping entire html pages from eur-lex." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://michalovadek.github.io/post/2020-12-16-the-eurlex-r-package/the-eurlex-r-package/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.css" integrity="" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.e9dfd0d72348b3575652bf8384f1cedc.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://michalovadek.github.io/post/2020-12-16-the-eurlex-r-package/the-eurlex-r-package/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@michal_ovadek" />
+    <meta property="twitter:creator" content="@michal_ovadek" />
+  
+  <meta property="og:site_name" content="Michal Ovádek" />
+  <meta property="og:url" content="https://michalovadek.github.io/post/2020-12-16-the-eurlex-r-package/the-eurlex-r-package/" />
+  <meta property="og:title" content="The eurlex R package | Michal Ovádek" />
+  <meta property="og:description" content="Dozens of political scientists and legal scholars use data on European Union laws in their research. The provenance of these data is rarely discussed. More often than not, researchers resort to the quick and dirty technique of scraping entire html pages from eur-lex." /><meta property="og:image" content="https://michalovadek.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://michalovadek.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2020-12-16T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2020-12-16T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://michalovadek.github.io/post/2020-12-16-the-eurlex-r-package/the-eurlex-r-package/"
+  },
+  "headline": "The eurlex R package",
+  
+  "datePublished": "2020-12-16T00:00:00Z",
+  "dateModified": "2020-12-16T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Michal Ovádek"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Michal Ovádek",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://michalovadek.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Dozens of political scientists and legal scholars use data on European Union laws in their research. The provenance of these data is rarely discussed. More often than not, researchers resort to the quick and dirty technique of scraping entire html pages from eur-lex."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>The eurlex R package | Michal Ovádek</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="9023743ecbf8bc887f99fc5c7dd57439" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.2da3b1fa37e894630bf6de39b1b694b3.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/publication/"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+          
+          <li class="nav-item d-none d-lg-inline-flex">
+            <a class="nav-link" href="https://twitter.com/michal_ovadek" data-toggle="tooltip" data-placement="bottom" title="Follow me on Twitter" target="_blank" rel="noopener" aria-label="Follow me on Twitter">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+          </li>
+        
+      
+
+      
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>The eurlex R package</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Dec 16, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    13 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/data/">Data</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Dozens of political scientists and legal scholars use data on European Union laws in their research. The provenance of these data is rarely discussed. More often than not, researchers resort to the quick and dirty technique of scraping entire html pages from <code>eur-lex.europa.eu</code>. This is not the optimal, nor preferred (from the perspective of the server host) approach of retrieving data, however, especially as the Publication Office of the European Union, the public body behind Eur-Lex, operates several dedicated APIs for automated retrieval of its data.</p>
+<p>The allure of web scraping is completely understandable. Not only is it easier to download data that can be readily seen in a user-friendly manner through a browser, using the dedicated APIs requires technical knowledge of semantic web and Client URL technologies, which is not necessarily widespread among researchers. And why go through the pain of learning how to compile SPARQL queries when it is much easier to simply download the web page?</p>
+<p>The <code>eurlex</code> <a href="https://github.com/michalovadek/eurlex" target="_blank" rel="noopener">R package</a> attempts to significantly reduce the overhead associated with using the SPARQL and REST APIs made available by the EU Publication Office. Although at present it does not offer access to the same array of information as comprehensive web scraping might, the package provides simpler, more efficient and transparent access to data on European Union law. This vignette gives a quick guide to the package and an even quicker introduction to the Eur-Lex dataverse.</p>
+<h1 id="the-eurlex-package">The <code>eurlex</code> package</h1>
+<p>The <code>eurlex</code> package currently envisions the typical use-case to consist of getting bulk information about EU legislation into R as fast as possible. The package contains three core functions to achieve that objective: <code>elx_make_query()</code> to create pre-defined or customized SPARQL queries; <code>elx_run_query()</code> to execute the pre-made or any other manually input query; and <code>elx_fetch_data()</code> to fire GET requests for certain metadata to the REST API.</p>
+<h2 id="elx_make_query-generate-sparql-queries"><code>elx_make_query()</code>: Generate SPARQL queries</h2>
+<p>The function <code>elx_make_query</code> takes as its first argument the type of resource to be retrieved from the semantic database that powers Eur-Lex (and other publications) called Cellar.</p>
+<pre><code class="language-r">library(eurlex)
+library(dplyr) # my preference, not needed for the package
+
+query_dir &lt;- elx_make_query(resource_type = &quot;directive&quot;)
+</code></pre>
+<p>Currently, it is possible to choose from among a host of resource types, including directives, regulations and even case law (see function description for the full list). It is also possible to manually specify a resource type from the <a href="http://publications.europa.eu/resource/authority/resource-type" target="_blank" rel="noopener">eligible list</a>.^[Note, however, that not all resource types will work properly with the pre-specified query.]</p>
+<p>The choice of resource type is then reflected in the SPARQL query generated by the function:</p>
+<pre><code class="language-r">query_dir %&gt;% 
+  glue::as_glue() # for nicer printing
+</code></pre>
+<pre><code>## PREFIX cdm: &lt;http://publications.europa.eu/ontology/cdm#&gt;
+##   PREFIX annot: &lt;http://publications.europa.eu/ontology/annotation#&gt;
+##   PREFIX skos:&lt;http://www.w3.org/2004/02/skos/core#&gt;
+##   PREFIX dc:&lt;http://purl.org/dc/elements/1.1/&gt;
+##   PREFIX xsd:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+##   PREFIX rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+##   PREFIX owl:&lt;http://www.w3.org/2002/07/owl#&gt;
+##   select distinct ?work ?type ?celex where{ ?work cdm:work_has_resource-type ?type. FILTER(?type=&lt;http://publications.europa.eu/resource/authority/resource-type/DIR&gt;||
+##   ?type=&lt;http://publications.europa.eu/resource/authority/resource-type/DIR_IMPL&gt;||
+##   ?type=&lt;http://publications.europa.eu/resource/authority/resource-type/DIR_DEL&gt;) 
+##  FILTER not exists{?work cdm:work_has_resource-type &lt;http://publications.europa.eu/resource/authority/resource-type/CORRIGENDUM&gt;} OPTIONAL{?work cdm:resource_legal_id_celex ?celex.} }
+</code></pre>
+<p>There are various ways of querying the same information in the Cellar database due to the existence of several overlapping classes and identifiers describing the same resources. The queries generated by the function should offer a reliable way of obtaining exhaustive results, as they have been validated by the helpdesk of the Publication Office. At the same time, it is always possible there will be issues either on the query or the database side; please report any you encounter through Github.</p>
+<p>The other arguments in <code>elx_make_query()</code> relate to additional metadata to be returned. The results include by default the <a href="https://eur-lex.europa.eu/content/tools/TableOfSectors/types_of_documents_in_eurlex.html" target="_blank" rel="noopener">CELEX number</a> and exclude corrigenda (corrections of errors in legislation). Other data needs to be opted into. Make sure to select ones that are logically compatible (e.g. case law does not have a legal basis). More options should be added in the future.</p>
+<p>Note that availability of data for each variable has an impact on the results. The data frame returned by the query will be shrunken to the size of the variable with most missing data. It is recommended to always compare results from a desired query to a minimal query requesting only celex ids.</p>
+<pre><code class="language-r">elx_make_query(resource_type = &quot;recommendation&quot;, include_date = TRUE, include_lbs = TRUE) %&gt;% 
+  glue::as_glue()
+</code></pre>
+<pre><code>## PREFIX cdm: &lt;http://publications.europa.eu/ontology/cdm#&gt;
+##   PREFIX annot: &lt;http://publications.europa.eu/ontology/annotation#&gt;
+##   PREFIX skos:&lt;http://www.w3.org/2004/02/skos/core#&gt;
+##   PREFIX dc:&lt;http://purl.org/dc/elements/1.1/&gt;
+##   PREFIX xsd:&lt;http://www.w3.org/2001/XMLSchema#&gt;
+##   PREFIX rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+##   PREFIX owl:&lt;http://www.w3.org/2002/07/owl#&gt;
+##   select distinct ?work ?type ?celex str(?date) ?lbs ?lbcelex ?lbsuffix where{ ?work cdm:work_has_resource-type ?type. FILTER(?type=&lt;http://publications.europa.eu/resource/authority/resource-type/RECO&gt;||
+##                    ?type=&lt;http://publications.europa.eu/resource/authority/resource-type/RECO_DEC&gt;||
+##                    ?type=&lt;http://publications.europa.eu/resource/authority/resource-type/RECO_DIR&gt;||
+##                    ?type=&lt;http://publications.europa.eu/resource/authority/resource-type/RECO_OPIN&gt;||
+##                    ?type=&lt;http://publications.europa.eu/resource/authority/resource-type/RECO_RES&gt;||
+##                    ?type=&lt;http://publications.europa.eu/resource/authority/resource-type/RECO_REG&gt;||
+##                    ?type=&lt;http://publications.europa.eu/resource/authority/resource-type/RECO_RECO&gt;||
+##                    ?type=&lt;http://publications.europa.eu/resource/authority/resource-type/RECO_DRAFT&gt;) 
+##  FILTER not exists{?work cdm:work_has_resource-type &lt;http://publications.europa.eu/resource/authority/resource-type/CORRIGENDUM&gt;} OPTIONAL{?work cdm:resource_legal_id_celex ?celex.} OPTIONAL{?work cdm:work_date_document ?date.} OPTIONAL{?work cdm:resource_legal_based_on_resource_legal ?lbs.
+##     ?lbs cdm:resource_legal_id_celex ?lbcelex.
+##     OPTIONAL{?bn owl:annotatedSource ?work.
+##     ?bn owl:annotatedProperty &lt;http://publications.europa.eu/ontology/cdm#resource_legal_based_on_resource_legal&gt;.
+##     ?bn owl:annotatedTarget ?lbs.
+##     ?bn annot:comment_on_legal_basis ?lbsuffix}} }
+</code></pre>
+<pre><code class="language-r"># minimal query: elx_make_query(resource_type = &quot;recommendation&quot;)
+</code></pre>
+<p>Now that we have a query, we are ready to run it.</p>
+<h2 id="elx_run_query-execute-sparql-queries"><code>elx_run_query()</code>: Execute SPARQL queries</h2>
+<p><code>elx_run_query()</code> sends SPARQL queries to a pre-specified endpoint. The function takes the query string as the main argument, which means you can manually pass it any working SPARQL query (relevant to official EU publications).</p>
+<pre><code class="language-r">results &lt;- elx_run_query(query = query_dir)
+
+# the functions are compatible with piping
+# 
+# elx_make_query(&quot;directive&quot;) %&gt;% 
+#   elx_run_query()
+</code></pre>
+<pre><code class="language-r">as_tibble(results)
+</code></pre>
+<pre><code>## # A tibble: 4,352 x 3
+##    work                                  type                            celex  
+##    &lt;chr&gt;                                 &lt;chr&gt;                           &lt;chr&gt;  
+##  1 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31979L~
+##  2 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31989L~
+##  3 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31984L~
+##  4 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31966L~
+##  5 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31993L~
+##  6 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31992L~
+##  7 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31983L~
+##  8 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31966L~
+##  9 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31974L~
+## 10 http://publications.europa.eu/resour~ http://publications.europa.eu/~ 31982L~
+## # ... with 4,342 more rows
+</code></pre>
+<p>The function outputs a <code>data.frame</code> where each column corresponds to one of the requested variables, while the rows accumulate observations of the resource type satisfying the query criteria. Obviously, the more data is to be returned, the longer the execution time, varying from a few seconds to several minutes, depending also on your connection.</p>
+<p>The first column always contains the unique URI of a &ldquo;work&rdquo; (legislative act or court judgment) which identifies each resource in Cellar. Several human-readable identifiers are normally associated with each &ldquo;work&rdquo; but the most useful one is CELEX, retrieved by default.^[Occasionally, you may encounter legal acts without CELEX numbers, especially when digging through older legislation. It is good to report these to the Eur-Lex helpdesk.]</p>
+<p>One column you should always pay attention to is <code>type</code> (as in <code>resource_type</code>). The URIs contained there reflect the FILTER argument in the SPARQL query, which is manually pre-specified. All resources are indexed as being of one type or another. For example, when retrieving directives, the results are going to return also delegated directives, which might not be desirable, depending on your needs. You can filter results by <code>type</code> to make the necessary adjustments. The queries are expansive by default in the spirit of erring on the side of over-inclusiveness rather than vice versa.</p>
+<pre><code class="language-r">head(results$type,5)
+</code></pre>
+<pre><code>## [1] &quot;http://publications.europa.eu/resource/authority/resource-type/DIR&quot;
+## [2] &quot;http://publications.europa.eu/resource/authority/resource-type/DIR&quot;
+## [3] &quot;http://publications.europa.eu/resource/authority/resource-type/DIR&quot;
+## [4] &quot;http://publications.europa.eu/resource/authority/resource-type/DIR&quot;
+## [5] &quot;http://publications.europa.eu/resource/authority/resource-type/DIR&quot;
+</code></pre>
+<pre><code class="language-r">results %&gt;% 
+  distinct(type)
+</code></pre>
+<pre><code>## # A tibble: 3 x 1
+##   type                                                                   
+##   &lt;chr&gt;                                                                  
+## 1 http://publications.europa.eu/resource/authority/resource-type/DIR     
+## 2 http://publications.europa.eu/resource/authority/resource-type/DIR_IMPL
+## 3 http://publications.europa.eu/resource/authority/resource-type/DIR_DEL
+</code></pre>
+<p>The data is returned in the long format, which means that rows are recycled up to the length of the variable with the most data points. For example, if 20 directives are returned, each with two legal bases, the resulting <code>data.frame</code> will have 40 rows. Some variables, such as dates, contain unexpectedly several entries for some documents. You should always check the number of unique identifiers in the results instead of assuming that each row is a unique observation.</p>
+<h3 id="eurovoc-descriptors">EuroVoc descriptors</h3>
+<p>EuroVoc is a multilingual thesaurus, keywords from which are used to describe the content of European Union documents. Most resource types that can be retrieved with the pre-defined queries in this package can be accompanied by EuroVoc keywords and these can be retrieved as other variables.</p>
+<pre><code class="language-r">rec_eurovoc &lt;- elx_make_query(&quot;recommendation&quot;, include_eurovoc = TRUE, limit = 10) %&gt;% 
+  elx_run_query() # truncated results for sake of the example
+
+rec_eurovoc %&gt;% 
+  select(celex, eurovoc)
+</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    celex          eurovoc                      
+##    &lt;chr&gt;          &lt;chr&gt;                        
+##  1 32012H0090     http://eurovoc.europa.eu/1425
+##  2 31962H0816     http://eurovoc.europa.eu/1004
+##  3 31974H0435     http://eurovoc.europa.eu/1085
+##  4 31996H0592     http://eurovoc.europa.eu/1076
+##  5 32015H0818(10) http://eurovoc.europa.eu/1021
+##  6 31974H0256     http://eurovoc.europa.eu/1318
+##  7 31999H0333     http://eurovoc.europa.eu/1442
+##  8 52004SC0086    http://eurovoc.europa.eu/1504
+##  9 32003H0579     http://eurovoc.europa.eu/114 
+## 10 E2004C0055     http://eurovoc.europa.eu/1442
+</code></pre>
+<p>By default, the endpoint returns the EuroVoc concept codes rather than the labels (keywords). The function <code>elx_label_eurovoc()</code> needs to be called to obtain a look-up table with the labels.</p>
+<pre><code class="language-r">eurovoc_lookup &lt;- elx_label_eurovoc(uri_eurovoc = rec_eurovoc$eurovoc)
+
+print(eurovoc_lookup)
+</code></pre>
+<pre><code>## # A tibble: 9 x 2
+##   eurovoc                       labels                       
+##   &lt;chr&gt;                         &lt;chr&gt;                        
+## 1 http://eurovoc.europa.eu/1085 France                       
+## 2 http://eurovoc.europa.eu/1442 food inspection              
+## 3 http://eurovoc.europa.eu/1076 form                         
+## 4 http://eurovoc.europa.eu/1318 Germany                      
+## 5 http://eurovoc.europa.eu/1504 Ireland                      
+## 6 http://eurovoc.europa.eu/114  Council of the European Union
+## 7 http://eurovoc.europa.eu/1425 consumer information         
+## 8 http://eurovoc.europa.eu/1004 welfare                      
+## 9 http://eurovoc.europa.eu/1021 tax system
+</code></pre>
+<p>The results include labels only for unique identifiers, but with <code>dplyr::left_join()</code> it is straightforward to append the labels to the entire dataset.</p>
+<pre><code class="language-r">rec_eurovoc %&gt;% 
+  left_join(eurovoc_lookup)
+</code></pre>
+<pre><code>## Joining, by = &quot;eurovoc&quot;
+</code></pre>
+<pre><code>## # A tibble: 10 x 5
+##    work                    type                 celex   eurovoc      labels     
+##    &lt;chr&gt;                   &lt;chr&gt;                &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      
+##  1 http://publications.eu~ http://publications~ 32012H~ http://euro~ consumer i~
+##  2 http://publications.eu~ http://publications~ 31962H~ http://euro~ welfare    
+##  3 http://publications.eu~ http://publications~ 31974H~ http://euro~ France     
+##  4 http://publications.eu~ http://publications~ 31996H~ http://euro~ form       
+##  5 http://publications.eu~ http://publications~ 32015H~ http://euro~ tax system 
+##  6 http://publications.eu~ http://publications~ 31974H~ http://euro~ Germany    
+##  7 http://publications.eu~ http://publications~ 31999H~ http://euro~ food inspe~
+##  8 http://publications.eu~ http://publications~ 52004S~ http://euro~ Ireland    
+##  9 http://publications.eu~ http://publications~ 32003H~ http://euro~ Council of~
+## 10 http://publications.eu~ http://publications~ E2004C~ http://euro~ food inspe~
+</code></pre>
+<p>As elsewhere in the API, we can tap into the multilingual nature of EU documents also when it comes to the EuroVoc keywords. Moreover, most concepts in the thesaurus are associated with alternative labels; these can be returned as well (separated by a comma).</p>
+<pre><code class="language-r">eurovoc_lookup &lt;- elx_label_eurovoc(uri_eurovoc = rec_eurovoc$eurovoc,
+                                    alt_labels = TRUE,
+                                    language = &quot;sk&quot;)
+
+rec_eurovoc %&gt;% 
+  left_join(eurovoc_lookup) %&gt;% 
+  select(celex, eurovoc, labels)
+</code></pre>
+<pre><code>## Joining, by = &quot;eurovoc&quot;
+</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    celex          eurovoc                       labels                          
+##    &lt;chr&gt;          &lt;chr&gt;                         &lt;chr&gt;                           
+##  1 32012H0090     http://eurovoc.europa.eu/1425 informácie pre spotrebitela,vzd~
+##  2 31962H0816     http://eurovoc.europa.eu/1004 blahobyt                        
+##  3 31974H0435     http://eurovoc.europa.eu/1085 Francúzska republika,Francúzsko 
+##  4 31996H0592     http://eurovoc.europa.eu/1076 formulár                        
+##  5 32015H0818(10) http://eurovoc.europa.eu/1021 danová sústava,danový systém    
+##  6 31974H0256     http://eurovoc.europa.eu/1318 NSR,Nemecko,Nemecká spolková re~
+##  7 31999H0333     http://eurovoc.europa.eu/1442 analýza potravín,kontrola potra~
+##  8 52004SC0086    http://eurovoc.europa.eu/1504 južné Írsko,Írsko               
+##  9 32003H0579     http://eurovoc.europa.eu/114  Rada Európskej únie,Rada Európs~
+## 10 E2004C0055     http://eurovoc.europa.eu/1442 analýza potravín,kontrola potra~
+</code></pre>
+<h2 id="elx_fetch_data-fire-get-requests"><code>elx_fetch_data()</code>: Fire GET requests</h2>
+<p>A core contribution of the SPARQL requests is that we obtain a comprehensive list of identifiers that we can subsequently use to obtain more data relating to the document in question. While the results of the SPARQL queries are useful also for webscraping (with the <code>rvest</code> package), the function <code>elx_fetch_data()</code> enables us to fire GET requests to retrieve data on documents with known identifiers (including Cellar URI).</p>
+<p>One of the most sought-after data in the Eur-Lex dataverse is the text. It is possible now to automate the pipeline for downloading html and plain texts from Eur-Lex. Similarly, you can retrieve the title of the document. For both you can specify also the desired language (English by default). Other metadata might be added in the future.</p>
+<pre><code class="language-r"># the function is not vectorized by default
+elx_fetch_data(results$work[1],&quot;title&quot;)
+</code></pre>
+<pre><code>## [1] &quot;Council Directive 79/173/EEC of 6 February 1979 on the programme for the acceleration and guidance of collective irrigation works in Corsica&quot;
+</code></pre>
+<pre><code class="language-r"># we can use purrr::map() to play that role
+library(purrr)
+
+dir_titles &lt;- results[1:10,] %&gt;% # take the first 10 directives only to save time
+  mutate(title = map_chr(work,elx_fetch_data, &quot;title&quot;)) %&gt;% 
+  as_tibble() %&gt;% 
+  select(celex, title)
+
+print(dir_titles)
+</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    celex      title                                                             
+##    &lt;chr&gt;      &lt;chr&gt;                                                             
+##  1 31979L0173 Council Directive 79/173/EEC of 6 February 1979 on the programme ~
+##  2 31989L0194 Council Directive 89/194/EEC of 13 March 1989 amending Directive ~
+##  3 31984L0378 Council Directive 84/378/EEC of 28 June 1984 amending the Annexes~
+##  4 31966L0683 Commission Directive 66/683/EEC of 7 November 1966 eliminating al~
+##  5 31993L0004 Council Directive 93/4/EEC of 8 February 1993 amending Directive ~
+##  6 31992L0017 Commission Directive 92/17/EEC of 17 March 1992 amending Directiv~
+##  7 31983L0447 Commission Directive 83/447/EEC of 18 August 1983 adopting the me~
+##  8 31966L0162 Council Directive 66/162/EEC of 28 February 1966 concerning the a~
+##  9 31974L0508 Commission Directive 74/508/EEC of 30 September 1974 amending Com~
+## 10 31982L0957 Third Commission Directive 82/957/EEC of 22 December 1982 amendin~
+</code></pre>
+<p>Note that text requests are by far the most time-intensive; requesting the full text for thousands of documents is liable to extend the run-time into hours. Texts are retrieved from html by priority, but methods for pdfs and .docs are also implemented.^[It is worth pointing out that the html and pdf contents of older case law differs. Whereas typically the html file is only going to contain a summary and grounds of a judgment, the pdf should also contain background to the dispute.] The function even handles multi-document resources (by pasting them together).</p>
+<h1 id="application">Application</h1>
+<p>In this section I showcase a simple application of <code>eurlex</code> on making overviews of EU legislation. First, we collate data on directives.</p>
+<pre><code class="language-r">dirs &lt;- elx_make_query(resource_type = &quot;directive&quot;, include_date = TRUE, include_force = TRUE) %&gt;% 
+  elx_run_query() %&gt;% 
+  rename(date = `callret-3`)
+</code></pre>
+<p>Let&rsquo;s calculate the proportion of directives currently in force in the entire set of directives ever adopted. This variable offers a particularly good demonstration of the usefulness of the package to retrieve EU law data, because it changes every day, as new acts enter into force and old ones drop out. Regularly scraping webpages for this purpose and scale is simply impractical and disproportional.</p>
+<pre><code class="language-r">library(ggplot2)
+
+dirs %&gt;% 
+  count(force) %&gt;% 
+  ggplot(aes(x = force, y = n)) +
+  geom_col()
+</code></pre>
+<img src="/post/2020-12-16-the-eurlex-r-package/2020-12-16-the-eurlex-r-package_files/figure-html/firstplot-1.png" width="672" />
+<p>Directives become naturally outdated with time. It might be all the more interesting to see which older acts are thus still surviving.</p>
+<pre><code class="language-r">dirs %&gt;% 
+  ggplot(aes(x = as.Date(date), y = celex)) +
+  geom_point(aes(color = force), alpha = 0.1) +
+  theme(axis.text.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.ticks.y = element_blank())
+</code></pre>
+<img src="/post/2020-12-16-the-eurlex-r-package/2020-12-16-the-eurlex-r-package_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<p>We want to know a bit more about the directives from 1970s that are still in force today. Their titles could give us a clue.</p>
+<pre><code class="language-r">dirs_1970_title &lt;- dirs %&gt;% 
+  filter(between(as.Date(date), as.Date(&quot;1970-01-01&quot;), as.Date(&quot;1980-01-01&quot;)),
+         force == &quot;true&quot;) %&gt;% 
+  mutate(title = map_chr(work,elx_fetch_data,&quot;title&quot;)) %&gt;% 
+  as_tibble()
+
+print(dirs_1970_title)
+</code></pre>
+<pre><code>## # A tibble: 64 x 6
+##    work                 type              celex  date  force title              
+##    &lt;chr&gt;                &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              
+##  1 http://publications~ http://publicati~ 31975~ 1975~ true  Council Directive ~
+##  2 http://publications~ http://publicati~ 31977~ 1977~ true  First Commission D~
+##  3 http://publications~ http://publicati~ 31977~ 1977~ true  Council Directive ~
+##  4 http://publications~ http://publicati~ 31973~ 1973~ true  Council Directive ~
+##  5 http://publications~ http://publicati~ 31974~ 1974~ true  Council Directive ~
+##  6 http://publications~ http://publicati~ 31972~ 1972~ true  Council Directive ~
+##  7 http://publications~ http://publicati~ 31972~ 1972~ true  Council Directive ~
+##  8 http://publications~ http://publicati~ 31977~ 1977~ true  Council Directive ~
+##  9 http://publications~ http://publicati~ 31979~ 1978~ true  Council Directive ~
+## 10 http://publications~ http://publicati~ 31979~ 1979~ true  Council Directive ~
+## # ... with 54 more rows
+</code></pre>
+<p>I will use the <code>tidytext</code> package to get a quick idea of what the legislation is about.</p>
+<pre><code class="language-r">library(tidytext)
+library(wordcloud)
+
+dirs_1970_title %&gt;% 
+  select(celex,title) %&gt;% 
+  unnest_tokens(word, title) %&gt;% 
+  count(celex, word, sort = TRUE) %&gt;% 
+  filter(!grepl(&quot;\\d&quot;, word)) %&gt;% 
+  bind_tf_idf(word, celex, n) %&gt;% 
+  with(wordcloud(word, tf_idf, max.words = 40, scale = c(1.8,0.1)))
+</code></pre>
+<img src="/post/2020-12-16-the-eurlex-r-package/2020-12-16-the-eurlex-r-package_files/figure-html/wordcloud-1.png" width="672" />
+<p>I use term-frequency inverse-document frequency (tf-idf) to weight the importance of the words in the wordcloud. If we used pure frequencies, the wordcloud would largely consist of words conveying little meaning (&ldquo;the&rdquo;, &ldquo;and&rdquo;, &hellip;).</p>
+<p>This is an extremely basic application of the <code>eurlex</code> package. Much more sophisticated methods can be used to analyse both the content and metadata of European Union legislation. If the package is useful for your research, please consider citing it.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/rstats/">rstats</a>
+  
+  <a class="badge badge-light" href="/tag/eurlex/">eurlex</a>
+  
+  <a class="badge badge-light" href="/tag/data/">data</a>
+  
+  <a class="badge badge-light" href="/tag/eu/">EU</a>
+  
+  <a class="badge badge-light" href="/tag/law/">law</a>
+  
+</div>
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://michalovadek.github.io/post/2020-12-16-the-eurlex-r-package/the-eurlex-r-package/&amp;text=The%20eurlex%20R%20package" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://michalovadek.github.io/post/2020-12-16-the-eurlex-r-package/the-eurlex-r-package/&amp;t=The%20eurlex%20R%20package" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=The%20eurlex%20R%20package&amp;body=https://michalovadek.github.io/post/2020-12-16-the-eurlex-r-package/the-eurlex-r-package/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://michalovadek.github.io/post/2020-12-16-the-eurlex-r-package/the-eurlex-r-package/&amp;title=The%20eurlex%20R%20package" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=The%20eurlex%20R%20package%20https://michalovadek.github.io/post/2020-12-16-the-eurlex-r-package/the-eurlex-r-package/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://michalovadek.github.io/post/2020-12-16-the-eurlex-r-package/the-eurlex-r-package/&amp;title=The%20eurlex%20R%20package" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://michalovadek.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/michal-ovadek/avatar_huc7300d673531c40d18c86b56fe18d9b9_2840164_270x270_fill_q75_lanczos_center.jpg" alt="Michal Ovádek"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://michalovadek.github.io/">Michal Ovádek</a></h5>
+      <h6 class="card-subtitle">Postdoctoral researcher</h6>
+      <p class="card-text">I am a scholar of law and politics in the European Union.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:michal.ovadek@gu.se" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/michal_ovadek" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=EZUR5jAAAAAJ" target="_blank" rel="noopener">
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/michalovadek" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/2019-02-18-from-law-to-data-flames-course/from-law-to-data-flames-course/">From Law to Data (FLAMES course)</a></li>
+      
+      <li><a href="/post/2019-07-08-pre-processing-steps-in-quantitative-text-analysis/pre-processing-steps-in-quantitative-text-analysis/">Pre-processing steps in quantitative text analysis</a></li>
+      
+      <li><a href="/post/2019-07-05-simulating-p-values-in-a-2x2-design/simulating-p-values-in-a-2x2-design/">Simulating p-values in a 2x2 design</a></li>
+      
+      <li><a href="/post/2019-12-07-time-series-data-and-kernel-density/time-series-data-and-kernel-density/">Kernel density estimation for time series plots</a></li>
+      
+      <li><a href="/publication/ovadek-2017-last/">At Last! Reaching the Remedy for Delay after a Long Ride through the EU Judicial System, Case T 577/14 Gascogne Sack Deutschland and Gascogne v. European Union, EU:T:2017:1</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+  <p class="powered-by">
+    © 2022 Michal Ovádek
+  </p>
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-themes" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+      <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.js" integrity="" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.7cd6ec29d281a73c92a2958a1584aadc.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>
