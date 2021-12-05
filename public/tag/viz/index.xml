@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>viz | Michal Ovádek</title>
+    <link>https://michalovadek.github.io/tag/viz/</link>
+      <atom:link href="https://michalovadek.github.io/tag/viz/index.xml" rel="self" type="application/rss+xml" />
+    <description>viz</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Michal Ovádek</copyright><lastBuildDate>Sat, 07 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://michalovadek.github.io/media/icon_hu47f642fef15b30aa1926993bc56415fb_14840_512x512_fill_lanczos_center_3.png</url>
+      <title>viz</title>
+      <link>https://michalovadek.github.io/tag/viz/</link>
+    </image>
+    
+    <item>
+      <title>Kernel density estimation for time series plots</title>
+      <link>https://michalovadek.github.io/post/2019-12-07-time-series-data-and-kernel-density/time-series-data-and-kernel-density/</link>
+      <pubDate>Sat, 07 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/post/2019-12-07-time-series-data-and-kernel-density/time-series-data-and-kernel-density/</guid>
+      <description>&lt;p&gt;In my research I frequently encounter count data that has a temporal dimension. The standard way of visualizing such data is to take the counts grouped at some temporal level (month, year, etc). The clustering essentially does away with the problem of the y-axis, namely in that it creates variation at evenly spaced out x-axis intervals. Let&amp;rsquo;s generate randomly a bunch of dates and show an archetypal bar plot at the year level of, say, judgments.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
+library(lubridate)
+
+set.seed(92139)
+
+dates &amp;lt;- as_date(as.Date(&amp;quot;2000-01-01&amp;quot;):as.Date(&amp;quot;2020-01-01&amp;quot;))
+
+dat &amp;lt;- sample(dates, 300, replace = F,
+              prob = abs(rnorm(length(dates),100, 200))
+              )
+
+dat %&amp;gt;% 
+  enframe() %&amp;gt;% 
+  mutate(year = as.integer(str_sub(value,1,4))) %&amp;gt;% 
+  group_by(year) %&amp;gt;% 
+  count() %&amp;gt;% 
+  ggplot(aes(x = year, y = n)) +
+  geom_col()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://michalovadek.github.io/post/2019-12-07-time-series-data-and-kernel-density/2019-12-07-time-series-data-and-kernel-density_files/figure-html/barplot-1.png&#34; alt=&#34;Number of fictitious judgments between 2000-2020&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Figure 1: Number of fictitious judgments between 2000-2020&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Nothing very special here. However, note that instead of using the actual &lt;em&gt;dates&lt;/em&gt; of the judgments, we sacrifice precision to obtain variation on the y-axis. Often the grouping (temporal) level &amp;ndash; year in our case &amp;ndash; does not carry any particular meaning beyond the fact that years are readily comprehensible to everyone. Can we do better?&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s go back to the same data and visualize the date of each judgment. Without any additional variable that could supply variation along a second dimension, I simply fix &lt;em&gt;y = 1&lt;/em&gt; to denote that each judgment is counted, well, once.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;dat %&amp;gt;% 
+  enframe() %&amp;gt;% 
+  ggplot(aes(x = value, y = 1)) +
+  geom_point(alpha = 0.1) +
+  theme_bw()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://michalovadek.github.io/post/2019-12-07-time-series-data-and-kernel-density/2019-12-07-time-series-data-and-kernel-density_files/figure-html/dots-1.png&#34; alt=&#34;Dates of fictitious judgments between 2000-2020&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Figure 2: Dates of fictitious judgments between 2000-2020&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;The visualization is not very good. Although the x-axis is now a proper continuous timeseries measured in days, there are too many judgments and days in the 20-year period to see clearly any patterns in the data. Increasing the transparency of the data points is a good first step, as darker areas indicate greater &lt;em&gt;density&lt;/em&gt; of judgments around that time.&lt;/p&gt;
+&lt;p&gt;We can exploit the full potential of the dates using the statistical concept of &lt;em&gt;kernel density&lt;/em&gt;. For ease of interpretation, we can think of this as a smoothed histogram. It is very straightforward to implement in &lt;code&gt;ggplot&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;dat %&amp;gt;% 
+  enframe() %&amp;gt;% 
+  ggplot(aes(x = value)) +
+  geom_vline(xintercept = as.Date(&amp;quot;2013-01-01&amp;quot;), lty = 2) +
+  annotate(&amp;quot;text&amp;quot;, x = as.Date(&amp;quot;2014-12-31&amp;quot;), y = 0.99, label = &amp;quot;Some event&amp;quot;, fontface = &amp;quot;bold&amp;quot;) +
+  geom_histogram(alpha = 0.1, aes(y = ..ncount..), bins = 40) +
+  stat_density(geom = &amp;quot;line&amp;quot;, adjust = 1/10, kernel = &amp;quot;gaussian&amp;quot;, aes(y = ..scaled..)) +
+  geom_point(alpha = 0.1, y = 0.1) +
+  theme_bw() +
+  theme(panel.grid = element_blank()) +
+  labs(x = NULL, y = &amp;quot;Kernel density estimates&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://michalovadek.github.io/post/2019-12-07-time-series-data-and-kernel-density/2019-12-07-time-series-data-and-kernel-density_files/figure-html/kde-1.png&#34; alt=&#34;Dates of fictitious judgments between 2000-2020 with density estimated&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Figure 3: Dates of fictitious judgments between 2000-2020 with density estimated&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Using &lt;code&gt;stat_density&lt;/code&gt; we get a nice continuous (estimated) timeseries of our data. The idea is to basically treat the time dimension as just a series of numbers over which a continuous distribution of our data can be drawn.&lt;/p&gt;
+&lt;p&gt;Setting &lt;code&gt;y = ..scaled..&lt;/code&gt; scales density to the 0-1 range, which is useful if we want to, for example, compare the kernel density estimates with a histogram that we similarly scale with &lt;code&gt;y = ..ncount..&lt;/code&gt;. Changing &lt;code&gt;adjust&lt;/code&gt; is the simplest way of controlling the smoothing parameter: the lower the value, the less smooth the curve (picks up on more variation). We can similarly adjust the histogram by increasing (decreasing) the number of &lt;code&gt;bins&lt;/code&gt;. There is a variety of methods to calculate kernel density and this is controlled through the &lt;code&gt;kernel&lt;/code&gt; parameter (&amp;ldquo;gaussian&amp;rdquo; by default).&lt;/p&gt;
+&lt;p&gt;Although caution is required &amp;ndash; we are after all estimating a smoothed curve from discrete data points &amp;ndash; I have found kernel density estimation to be a valuable tool for exploring temporal patterns. In most cases it is decisively superior to a bar chart with arbitrarily grouped counts on the y-axis. The below is an example from my PhD thesis where I compare a theoretical model of time variation with a kernel density estimate drawn from submission dates of court cases.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34; &#34; srcset=&#34;
+               /media/temporal_hu30d20394123abe532c5f7fba28c9db35_54877_0286f5320d1d72c0a7d7c4f9c5d81c96.png 400w,
+               /media/temporal_hu30d20394123abe532c5f7fba28c9db35_54877_564d21158a67efb3417ba0573ea2df85.png 760w,
+               /media/temporal_hu30d20394123abe532c5f7fba28c9db35_54877_1200x1200_fit_lanczos_3.png 1200w&#34;
+               src=&#34;https://michalovadek.github.io/media/temporal_hu30d20394123abe532c5f7fba28c9db35_54877_0286f5320d1d72c0a7d7c4f9c5d81c96.png&#34;
+               width=&#34;760&#34;
+               height=&#34;738&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Simulating p-values in a 2x2 design</title>
+      <link>https://michalovadek.github.io/post/2019-07-05-simulating-p-values-in-a-2x2-design/simulating-p-values-in-a-2x2-design/</link>
+      <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/post/2019-07-05-simulating-p-values-in-a-2x2-design/simulating-p-values-in-a-2x2-design/</guid>
+      <description>&lt;p&gt;In a recent &lt;a href=&#34;https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3352467&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;paper&lt;/a&gt; in which I analysed experimental data on law students&#39; aversion to politically motivated legal arguments, I realized there was a fairly trivial but systematic relationship between changes in the distribution of outcomes drawn from a binomial distribution in the control group and p-values. For the graphically minded among us (myself) a picture is worth a thousand Greek letters, so below I am including a plot explaining the relationship on simulated data, including the simulation and &lt;code&gt;ggplot2&lt;/code&gt; code. The data concerns a 2x2 contingency matrix (control, treatment x 2 conditions with varying impact on outcome distribution in the control group) and p-values are obtained using Fisher&amp;rsquo;s exact test for count data (one-sided).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tidyverse)
+library(Exact)
+library(ggrepel)
+
+# simulate
+
+set.seed(1923)
+
+n = as.integer(40)
+amb &amp;lt;- seq(0.05,0.50,by=0.05) 
+  
+d &amp;lt;- dbinom(x = 0:n, size = n, prob = amb[1]) %&amp;gt;% 
+  tibble(x = 0:n, n, p = ., amb = amb[1])
+
+for (i in 1:length(amb)){
+  
+  d &amp;lt;- dbinom(x = 0:n, size = n, prob = amb[i]) %&amp;gt;% 
+    tibble(x = 0:n, n, p = ., amb = amb[i]) %&amp;gt;% 
+    bind_rows(d,.)
+  
+}
+
+sampled &amp;lt;- d %&amp;gt;% 
+  sample_n(10, replace = TRUE, weight = p) %&amp;gt;% # increase sample to &amp;gt; 1000
+  rename(b = x) %&amp;gt;% 
+  mutate(a = as.integer(n - b),
+         amb_obs = b/n) %&amp;gt;% 
+  crossing(c = 0:40) %&amp;gt;% 
+  mutate(d = as.integer(n - c)) %&amp;gt;% 
+  rowwise() %&amp;gt;% 
+  mutate(p.value = fisher.test(tibble(j = c(a,c), k = c(b,d)),alternative = &amp;quot;greater&amp;quot;) %&amp;gt;% 
+           broom::tidy() %&amp;gt;% 
+           select(p.value) %&amp;gt;% 
+           deframe())
+
+dat &amp;lt;- sampled %&amp;gt;% 
+  group_by(amb,d) %&amp;gt;% 
+  summarise(p.value = mean(p.value)) %&amp;gt;% 
+  mutate(lbl = ifelse(amb %in% c(0.05,0.50) &amp;amp; p.value &amp;lt; 0.05 &amp;amp; p.value &amp;gt; 0.035,paste(&amp;quot;x = &amp;quot;,d,sep = &amp;quot;&amp;quot;),NA))
+
+# plot
+
+dat %&amp;gt;% 
+  ggplot(aes(x=d, y = p.value, color = amb)) +
+  geom_hline(yintercept = 0.05, color = &amp;quot;grey90&amp;quot;, lty = 2, size = 1.2) +
+  annotate(geom = &amp;quot;text&amp;quot;, x = 35, y = 0.1, label = expression(alpha~&amp;quot; = 0.05&amp;quot;), color = &amp;quot;grey90&amp;quot;, size = 5) +
+  geom_point(alpha = 0.7) +
+  #geom_smooth(aes(y = p.value, color = amb)) +
+  geom_label_repel(aes(label = lbl, x = d, y = p.value),
+                   fontface = &amp;quot;italic&amp;quot;,
+                   segment.color = &amp;quot;grey80&amp;quot;,
+                   segment.alpha = 0.5,
+                   segment.size = 0.8,
+                   nudge_x = ifelse(deframe(na.omit(dat)[,2])&amp;gt;32,2,-3.7),
+                   nudge_y = ifelse(deframe(na.omit(dat)[,2])&amp;gt;32,0.1,-0.03)) +
+  scale_color_distiller(palette = &amp;quot;Spectral&amp;quot;, direction = -1,
+                        limits = c(0.05,0.50),
+                        breaks = c(0.05,0.20,0.35,0.50),
+                        labels = c(0.05,0.20,0.35,0.50)) +
+  theme_minimal() +
+  labs(x = &amp;quot;Number of hypothesis-confirming responses in treatment group&amp;quot;, y = &amp;quot;p-value&amp;quot;, color = &amp;quot;Ambiguity&amp;quot;) +
+  theme(panel.background = element_rect(fill = &amp;quot;grey20&amp;quot;),
+        panel.grid = element_line(color = &amp;quot;grey40&amp;quot;),
+        legend.position = c(0.775,0.72),
+        legend.background = element_blank(),
+        legend.key.size = unit(10,&amp;quot;mm&amp;quot;),
+        legend.text = element_text(color = &amp;quot;grey90&amp;quot;),
+        legend.title = element_text(color = &amp;quot;grey90&amp;quot;, face = &amp;quot;bold&amp;quot;),
+        legend.spacing.y = unit(4,&amp;quot;mm&amp;quot;),
+        legend.box = &amp;quot;horizontal&amp;quot;,
+        legend.direction = &amp;quot;horizontal&amp;quot;,
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_line(color = &amp;quot;grey30&amp;quot;, linetype = 2),
+        panel.grid.major.x = element_line(linetype = 3),
+        panel.grid.minor.x = element_blank()) +
+  guides(color = guide_colourbar(title.position=&amp;quot;top&amp;quot;, title.hjust = 0.5, reverse = F))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://michalovadek.github.io/post/2019-07-05-simulating-p-values-in-a-2x2-design/2019-07-05-simulating-p-values-in-a-2x2-design_files/figure-html/unnamed-chunk-1-1.png&#34; alt=&#34;Note the low number of samples makes some lines look crooked. In a real application the number of iterations must be at least 1000. I am skimping on samples here to reduce computation.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Figure 1: Note the low number of samples makes some lines look crooked. In a real application the number of iterations must be at least 1000. I am skimping on samples here to reduce computation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;This little project also made me realize that the spectral color theme looks rather good on a dark background. Although not the most conventional, I will definitely consider darker plot backgrounds in future visualizations.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

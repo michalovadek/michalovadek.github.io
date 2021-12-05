@@ -1,0 +1,1267 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Michal Ovádek" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="This post is a footnote to documentation to the glmnet package and the tidymodels framework. glmnet is best known for fitting models via penalized maximum likelihood like ridge, lasso and elastic net regression." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.css" integrity="" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.e9dfd0d72348b3575652bf8384f1cedc.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu47f642fef15b30aa1926993bc56415fb_14840_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu47f642fef15b30aa1926993bc56415fb_14840_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@michal_ovadek" />
+    <meta property="twitter:creator" content="@michal_ovadek" />
+  
+  <meta property="og:site_name" content="Michal Ovádek" />
+  <meta property="og:url" content="https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/" />
+  <meta property="og:title" content="Grid search for elastic net regularization | Michal Ovádek" />
+  <meta property="og:description" content="This post is a footnote to documentation to the glmnet package and the tidymodels framework. glmnet is best known for fitting models via penalized maximum likelihood like ridge, lasso and elastic net regression." /><meta property="og:image" content="https://michalovadek.github.io/media/icon_hu47f642fef15b30aa1926993bc56415fb_14840_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://michalovadek.github.io/media/icon_hu47f642fef15b30aa1926993bc56415fb_14840_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-12-05T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-12-05T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/"
+  },
+  "headline": "Grid search for elastic net regularization",
+  
+  "datePublished": "2021-12-05T00:00:00Z",
+  "dateModified": "2021-12-05T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Michal Ovádek"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Michal Ovádek",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://michalovadek.github.io/media/icon_hu47f642fef15b30aa1926993bc56415fb_14840_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "This post is a footnote to documentation to the glmnet package and the tidymodels framework. glmnet is best known for fitting models via penalized maximum likelihood like ridge, lasso and elastic net regression."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Grid search for elastic net regularization | Michal Ovádek</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="cb06cfeb0678cbb756abcbde6572bd47" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.2da3b1fa37e894630bf6de39b1b694b3.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/publication/"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+          
+          <li class="nav-item d-none d-lg-inline-flex">
+            <a class="nav-link" href="https://twitter.com/michal_ovadek" data-toggle="tooltip" data-placement="bottom" title="Follow me on Twitter" target="_blank" rel="noopener" aria-label="Follow me on Twitter">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+          </li>
+        
+      
+
+      
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Grid search for elastic net regularization</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Dec 5, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/data/">Data</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>This post is a footnote to documentation to the <code>glmnet</code> package and the <code>tidymodels</code> framework. <code>glmnet</code> is best known for fitting models via penalized maximum likelihood like ridge, lasso and elastic net regression. As explained in its documentatiom, <code>glmnet</code> solves the problem</p>
+<p>$\begin{align}
+\min_{\beta_0,\beta_1}\frac{1}{N}\sum_{i=1}^Nw_il(y_i,\beta_0+β^Tx_i)+\lambda[(1−\alpha)∥\beta∥^2_2/2+\alpha∥\beta∥_1]
+\end{align}$</p>
+<p>where <code>glmnet::glmnet()</code> conducts a grid search over values of <em>$\lambda$</em> which controls the overall strength of the penalty in the second term. When <em>$\alpha = 1$</em> we speak of lasso regression which can shrink coefficients to zero (discard them), while ridge regression ($\alpha = 0$) does not remove features.</p>
+<p><code>glmnet::glmnet()</code> expects the user to set the value of <em>$\alpha \in [0,1]$</em>. In practice, however, many users will not know whether ridge, lasso or their mixture is most appropriate to their problem. Especially when we only care about minimizing <em>$|\hat{y} - y|$</em> we might want to conduct a grid search over both <em>$\lambda$</em> and <em>$\alpha$</em> to find the most suitable tuple of hyperparameter values for our model. The example below shows that this dual search is particularly easy to implement with <code>tidymodels</code>.</p>
+<h2 id="house-prices-in-slovakia">House prices in Slovakia</h2>
+<p>To exemplify the grid search I use a toy dataset with possible determinants of average quarterly house prices ($y$) in Slovakia. Let&rsquo;s pretend that we have no idea about what affects house prices. Our design matrix <em>$X$</em> consists of a bunch of more or less reasonable predictors like average wage and net migration.</p>
+<pre><code class="language-r"># load the data
+data &lt;- &quot;https://github.com/michalovadek/misc/blob/main/sk_house_prices.RData?raw=true&quot;
+load(url(data))
+</code></pre>
+<p>We will need the <code>tidymodels</code> set of packages and a seed for replicability.</p>
+<pre><code class="language-r">library(tidymodels)
+#require(glmnet)
+
+set.seed(94241)
+</code></pre>
+<p>Our goal is to find a penalized regression model that is good at predicting house prices with the available predictors. To mitigate overfitting, we will both split our data into a training and a test set and deploy k-fold cross-validation.</p>
+<pre><code class="language-r"># let's not worry about missing values and time ids
+data &lt;- dat_agg |&gt; 
+  dplyr::select(-year,-quarter) |&gt; 
+  tidyr::fill(dplyr::everything(), .direction = &quot;updown&quot;)
+
+# we keep 1/4 of the observations for testing
+split &lt;- initial_split(data,
+                       prop = 3/4)
+
+train_data &lt;- training(split)
+test_data &lt;- testing(split)
+
+# k-fold cross-validation
+folds &lt;- vfold_cv(train_data, v = 10)
+</code></pre>
+<p>We define the model and workflow for fitting it. We will be conducting a grid search over both <code>penalty</code> ($\lambda$) and <code>mixture</code> ($\alpha$).</p>
+<pre><code class="language-r"># define model
+model &lt;- linear_reg(penalty = tune(), mixture = tune()) |&gt;
+  set_engine(&quot;glmnet&quot;)
+
+# RHS in formula selects all predictors
+model_wf &lt;- workflow() |&gt;
+  add_model(model) |&gt;
+  add_formula(price ~ .)
+</code></pre>
+<p>Now for the grid search. We are looking for the best combination of <em>$\lambda$</em> and <em>$\alpha$</em>. We create this grid with the appropriately named <code>expand_grid()</code> (or <code>expand.grid</code> in <code>base</code>).</p>
+<pre><code class="language-r"># suitable values of lambda will vary
+# you can run glmnet::glmnet() to get the ballpark range for your data
+grid &lt;- tidyr::expand_grid(penalty = seq(0.1, 15, length.out = 50),
+                           mixture = c(0, 0.33, 0.66, 1))
+</code></pre>
+<p>We are ready to search the hyperparameter space using our k-folded training data.</p>
+<pre><code class="language-r"># we will use R^2 to evaluate model performance
+search_res &lt;- model_wf |&gt; 
+  tune_grid(folds,
+            grid = grid,
+            control = control_grid(save_pred = TRUE),
+            metrics = metric_set(rsq))
+</code></pre>
+<p>The results can be parsed manually by running <code>collect_metrics()</code> but <code>tidymodels</code> comes with a handy <code>autoplot()</code> method that will give us a quick answer as to which hyperparameter tuple performed best.</p>
+<pre><code class="language-r">autoplot(search_res)
+</code></pre>
+<img src="/post/2021-12-05-grid-search-for-elastic-net-regularization/2021-12-05-grid-search-for-elastic-net-regularization_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<p>We can immediately see some clear differences between the model options. For the selected range of <em>$\lambda$</em>, the performance of ridge regression does not change. Given how small our toy dataset is (and $N_{obs} &gt; N_{predictors}$), it is not surprising that small penalties perform best.</p>
+<p>The workflow is completed by picking and fitting the best model and seeing how it performs on unseen data (our test set).</p>
+<pre><code class="language-r"># select model by highest R^2
+best_param &lt;- search_res |&gt; select_best()
+
+# final workflow
+model_wf_final &lt;- finalize_workflow(model_wf, best_param)
+
+# fit final model
+final_fit &lt;- model_wf_final |&gt; 
+  fit(data = train_data)
+
+# predict using test set
+test_data$.pred &lt;- predict(final_fit, new_data = test_data)$.pred
+</code></pre>
+<pre><code class="language-r"># plot y and yhat
+test_data |&gt; 
+  ggplot(aes(x = price, y = .pred)) +
+  geom_point() +
+  geom_abline(slope = 1, color = &quot;grey30&quot;) +
+  theme_minimal()
+</code></pre>
+<img src="/post/2021-12-05-grid-search-for-elastic-net-regularization/2021-12-05-grid-search-for-elastic-net-regularization_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<p>Looks good. Final performance metrics are obtained via <code>metrics()</code>:</p>
+<pre><code class="language-r">metrics(test_data, truth = price, estimate = .pred)
+</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rmse    standard      72.5  
+## 2 rsq     standard       0.938
+## 3 mae     standard      47.1
+</code></pre>
+<p>And that&rsquo;s it. <code>glmnet</code> and <code>tidymodels</code> are a powerful and easy-to-use duo for high-dimensional data analysis.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/regression/">regression</a>
+  
+  <a class="badge badge-light" href="/tag/penalized/">penalized</a>
+  
+  <a class="badge badge-light" href="/tag/elastic-net/">elastic net</a>
+  
+  <a class="badge badge-light" href="/tag/lasso/">lasso</a>
+  
+  <a class="badge badge-light" href="/tag/ridge/">ridge</a>
+  
+</div>
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/&amp;text=Grid%20search%20for%20elastic%20net%20regularization" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/&amp;t=Grid%20search%20for%20elastic%20net%20regularization" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Grid%20search%20for%20elastic%20net%20regularization&amp;body=https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/&amp;title=Grid%20search%20for%20elastic%20net%20regularization" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Grid%20search%20for%20elastic%20net%20regularization%20https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/&amp;title=Grid%20search%20for%20elastic%20net%20regularization" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://michalovadek.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/michal-ovadek/avatar_huc7300d673531c40d18c86b56fe18d9b9_2840164_270x270_fill_q75_lanczos_center.jpg" alt="Michal Ovádek"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://michalovadek.github.io/">Michal Ovádek</a></h5>
+      <h6 class="card-subtitle">Postdoctoral researcher</h6>
+      <p class="card-text">I am a scholar of law and politics in the European Union.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:michal.ovadek@gu.se" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/michal_ovadek" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?user=EZUR5jAAAAAJ" target="_blank" rel="noopener">
+        <i class="fas fa-graduation-cap"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/michalovadek" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+  <p class="powered-by">
+    © 2022 Michal Ovádek
+  </p>
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-themes" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+        <script src="https://cdn.jsdelivr.net/gh/desandro/imagesloaded@v4.1.4/imagesloaded.pkgd.min.js" integrity="sha512-S5PZ9GxJZO16tT9r3WJp/Safn31eu8uWrzglMahDT4dsmgqWonRY9grk3j+3tfuPr9WJNsfooOR7Gi7HL5W2jw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/metafizzy/isotope@v3.0.6/dist/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js" integrity="sha512-Ypjm0o7jOxAd4hpdoppSEN0TQOC19UtPAqD+4s5AlXmUvbmmS/YMxYqAqarQYyxTnB6/rqip9qcxlNB/3U9Wdg==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+      <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.js" integrity="" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.7cd6ec29d281a73c92a2958a1584aadc.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

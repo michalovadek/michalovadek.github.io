@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monika Glavina | Michal Ovádek</title>
+    <link>https://michalovadek.github.io/author/monika-glavina/</link>
+      <atom:link href="https://michalovadek.github.io/author/monika-glavina/index.xml" rel="self" type="application/rss+xml" />
+    <description>Monika Glavina</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Michal Ovádek</copyright><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://michalovadek.github.io/media/icon_hu47f642fef15b30aa1926993bc56415fb_14840_512x512_fill_lanczos_center_3.png</url>
+      <title>Monika Glavina</title>
+      <link>https://michalovadek.github.io/author/monika-glavina/</link>
+    </image>
+    
+    <item>
+      <title>Raising the Bar: The Development of Docket Control on the Court of Justice</title>
+      <link>https://michalovadek.github.io/publication/dyevre-2021-raising/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/publication/dyevre-2021-raising/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The Voices of European Law: Legislators, Judges and Law Professors</title>
+      <link>https://michalovadek.github.io/publication/dyevre-2021-voices/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/publication/dyevre-2021-voices/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Which Courts Matter Most? Measuring Importance in the EU Preliminary Reference System</title>
+      <link>https://michalovadek.github.io/publication/ovadek-2020-which/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/publication/ovadek-2020-which/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

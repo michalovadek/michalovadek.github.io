@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Arthur Dyevre | Michal Ovádek</title>
+    <link>https://michalovadek.github.io/author/arthur-dyevre/</link>
+      <atom:link href="https://michalovadek.github.io/author/arthur-dyevre/index.xml" rel="self" type="application/rss+xml" />
+    <description>Arthur Dyevre</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Michal Ovádek</copyright><lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://michalovadek.github.io/media/icon_hu47f642fef15b30aa1926993bc56415fb_14840_512x512_fill_lanczos_center_3.png</url>
+      <title>Arthur Dyevre</title>
+      <link>https://michalovadek.github.io/author/arthur-dyevre/</link>
+    </image>
+    
+    <item>
+      <title>Analysing EU Treaty-Making and Litigation with Network Analysis and Natural Language Processing</title>
+      <link>https://michalovadek.github.io/publication/ovadek-2021-analysing/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/publication/ovadek-2021-analysing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Raising the Bar: The Development of Docket Control on the Court of Justice</title>
+      <link>https://michalovadek.github.io/publication/dyevre-2021-raising/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/publication/dyevre-2021-raising/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The Voices of European Law: Legislators, Judges and Law Professors</title>
+      <link>https://michalovadek.github.io/publication/dyevre-2021-voices/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/publication/dyevre-2021-voices/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Experimental Legal Methods in the Classroom</title>
+      <link>https://michalovadek.github.io/publication/dyevre-2020-experimental/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/publication/dyevre-2020-experimental/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>What&#39;s the Talk in Brussels? Leveraging Daily News Coverage to Measure Issue Attention in the European Union</title>
+      <link>https://michalovadek.github.io/publication/ovadek-2020-whats/</link>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/publication/ovadek-2020-whats/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
