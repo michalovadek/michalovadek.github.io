@@ -5,12 +5,37 @@
     <link>https://michalovadek.github.io/category/data/</link>
       <atom:link href="https://michalovadek.github.io/category/data/index.xml" rel="self" type="application/rss+xml" />
     <description>Data</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Michal Ovádek</copyright><lastBuildDate>Sun, 05 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Michal Ovádek</copyright><lastBuildDate>Tue, 08 Feb 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://michalovadek.github.io/media/icon_hu47f642fef15b30aa1926993bc56415fb_14840_512x512_fill_lanczos_center_3.png</url>
       <title>Data</title>
       <link>https://michalovadek.github.io/category/data/</link>
     </image>
+    
+    <item>
+      <title>Declining trust in presidents</title>
+      <link>https://michalovadek.github.io/post/2022-02-08-declining-trust-in-presidents/declining-trust-in-presidents/</link>
+      <pubDate>Tue, 08 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/post/2022-02-08-declining-trust-in-presidents/declining-trust-in-presidents/</guid>
+      <description>&lt;p&gt;Recently, &lt;a href=&#34;https://twitter.com/ZuzanaCaputova&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Zuzana Čaputová&lt;/a&gt;, the president of Slovakia, has been on the receiving end of an increased number of attacks by opposition MPs. Her popularity, which has in any case been in decline since anti-covid measures began to polarize the society, has taken a hit as a result.&lt;/p&gt;
+&lt;p&gt;I looked at historical polling data to assess the probability of trust in Čaputová bouncing back. In sum, she does not have many reasons to feel optimistic.&lt;/p&gt;
+&lt;p&gt;The Slovak political system is classified as either a parliamentary or a semi-presidential regime. The president is not the most powerful elected official but they are frequently among the most popular. The president is expected to be above party politics, which benefits their popularity. Political opponents therefore frequently try to drag them into polarizing topics to erode their &amp;ldquo;elevated&amp;rdquo; status.&lt;/p&gt;
+&lt;p&gt;Presidential elections are only held every five years, so popularity is largely tracked through regular polls. Currently, most pollsters provide respondents with a list of political leaders and ask about their trustworthiness. In the past, the more common measurement method was to ask the respondents to spontaneously name most trustworthy politicians. This discrepancy is an obvious hurdle to historical comparison.&lt;/p&gt;
+&lt;p&gt;I manually collected data from all polls, of both the closed-list and the spontaneous kind. I then centered and scaled both types of scores to make them comparable. The full time series looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;measure |&amp;gt; 
+  ggplot(aes(x = month, y = scaled)) +
+  geom_point() +
+  theme_bw()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&#34;https://michalovadek.github.io/post/2021-02-08-declining-trust-in-presidents_files/figure-html/firstplot-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;In the next step, I segment the data by president and estimate a trend line with local polynomial regression (&lt;code&gt;loess()&lt;/code&gt;). I am interested in the overall trend of each president&amp;rsquo;s popularity, so I am looking for a rather smoothed line (controlled with &lt;code&gt;span&lt;/code&gt;).&lt;/p&gt;
+&lt;img src=&#34;https://michalovadek.github.io/post/2021-02-08-declining-trust-in-presidents_files/figure-html/mainplot-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;The trend lines tell a pretty clear story. All presidents have ended their terms with significantly less trust compared to the starting levels. This finding is largely consistent with the &lt;a href=&#34;https://www.cambridge.org/core/journals/political-science-research-and-methods/article/electoral-cycle-effect-in-parliamentary-democracies/B2C3071988DE9492F67BB79276D722A1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;literature on government support&lt;/a&gt;. The final data points for Kováč and Kiska, taken at the end of their time in office, show just how quickly support dissipates after exit from office.&lt;/p&gt;
+&lt;p&gt;Recovering trust will be an uphill struggle for Čaputová. Literature on semi-presidentialism points to intra-executive conflicts between the president and the government as being usually good for the president. In the Slovak case, the best example of this phenomenon is probably the end of Rudolf Schuster&amp;rsquo;s term when he began more vehemently attacking the increasingly unpopular government of PM Mikuláš Dzurinda. However, such conflicts can also tarnish the presidents&#39; image as the nation&amp;rsquo;s metaphorical wise father/mother.&lt;/p&gt;
+&lt;p&gt;I am not addressing here a myriad of issues in the data. In addition to the polls asking two different questions, there are often discrepancies between the reported scores of different pollsters from the same polling period. Pollster-driven bias is likely candidate-specific. The frequency of polling varies quite a bit. The overall quality and consistency of polling may have changed over time as well.&lt;/p&gt;
+&lt;p&gt;Nonetheless, I doubt that correcting for these biases would fundamentally alter the basic conclusions that presidents&#39; ratings (1) peak in the first two years in office and (2) from there trend downwards and bottom out at some point during the last year in office.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Grid search for elastic net regularization</title>
