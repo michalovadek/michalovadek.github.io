@@ -16,6 +16,18 @@
   <url>
     <loc>https://michalovadek.github.io/event/</loc><lastmod>2030-06-01T13:00:00+00:00</lastmod></url>
   <url>
+    <loc>https://michalovadek.github.io/publication-type/2/</loc><lastmod>2022-04-23T00:00:00+00:00</lastmod></url>
+  <url>
+    <loc>https://michalovadek.github.io/authors/</loc><lastmod>2022-04-23T00:00:00+00:00</lastmod></url>
+  <url>
+    <loc>https://michalovadek.github.io/author/michal-ovadek/</loc><lastmod>2022-04-23T00:00:00+00:00</lastmod></url>
+  <url>
+    <loc>https://michalovadek.github.io/publication_types/</loc><lastmod>2022-04-23T00:00:00+00:00</lastmod></url>
+  <url>
+    <loc>https://michalovadek.github.io/publication/</loc><lastmod>2022-04-23T00:00:00+00:00</lastmod></url>
+  <url>
+    <loc>https://michalovadek.github.io/publication/ovadek-2022-making/</loc><lastmod>2022-04-23T00:00:00+00:00</lastmod></url>
+  <url>
     <loc>https://michalovadek.github.io/categories/</loc><lastmod>2022-02-08T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://michalovadek.github.io/category/data/</loc><lastmod>2022-02-08T00:00:00+00:00</lastmod></url>
@@ -34,6 +46,12 @@
   <url>
     <loc>https://michalovadek.github.io/tag/trust/</loc><lastmod>2022-02-08T00:00:00+00:00</lastmod></url>
   <url>
+    <loc>https://michalovadek.github.io/author/nicolas-lampach/</loc><lastmod>2022-01-01T00:00:00+00:00</lastmod></url>
+  <url>
+    <loc>https://michalovadek.github.io/publication/yeung-2022-time/</loc><lastmod>2022-01-01T00:00:00+00:00</lastmod></url>
+  <url>
+    <loc>https://michalovadek.github.io/author/timothy-yu-cheong-yeung/</loc><lastmod>2022-01-01T00:00:00+00:00</lastmod></url>
+  <url>
     <loc>https://michalovadek.github.io/tag/elastic-net/</loc><lastmod>2021-12-05T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://michalovadek.github.io/post/2021-12-05-grid-search-for-elastic-net-regularization/grid-search-for-elastic-net-regularization/</loc><lastmod>2021-12-05T00:00:00+00:00</lastmod></url>
@@ -50,15 +68,11 @@
   <url>
     <loc>https://michalovadek.github.io/courses/example/</loc><lastmod>2021-01-24T00:00:00+00:00</lastmod></url>
   <url>
-    <loc>https://michalovadek.github.io/publication-type/2/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
-  <url>
     <loc>https://michalovadek.github.io/publication-type/5/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://michalovadek.github.io/publication/ovadek-2021-analysing/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://michalovadek.github.io/author/arthur-dyevre/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
-  <url>
-    <loc>https://michalovadek.github.io/authors/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://michalovadek.github.io/publication/ovadek-2021-facilitating/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
   <url>
@@ -66,17 +80,11 @@
   <url>
     <loc>https://michalovadek.github.io/author/kyra-wigard/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
   <url>
-    <loc>https://michalovadek.github.io/author/michal-ovadek/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
-  <url>
     <loc>https://michalovadek.github.io/author/monika-glavina/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://michalovadek.github.io/publication/ovadek-2021-popular/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://michalovadek.github.io/publication/ovadek-2021-procedural/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
-  <url>
-    <loc>https://michalovadek.github.io/publication_types/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
-  <url>
-    <loc>https://michalovadek.github.io/publication/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://michalovadek.github.io/publication/dyevre-2021-raising/</loc><lastmod>2021-01-01T00:00:00+00:00</lastmod></url>
   <url>
@@ -103,8 +111,6 @@
     <loc>https://michalovadek.github.io/publication/wouters-2020-bilateral/</loc><lastmod>2020-01-01T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://michalovadek.github.io/publication/dyevre-2020-experimental/</loc><lastmod>2020-01-01T00:00:00+00:00</lastmod></url>
-  <url>
-    <loc>https://michalovadek.github.io/author/nicolas-lampach/</loc><lastmod>2020-01-01T00:00:00+00:00</lastmod></url>
   <url>
     <loc>https://michalovadek.github.io/author/wessel-wijtvliet/</loc><lastmod>2020-01-01T00:00:00+00:00</lastmod></url>
   <url>

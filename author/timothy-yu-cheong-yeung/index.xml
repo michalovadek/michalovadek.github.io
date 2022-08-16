@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Timothy Yu-Cheong Yeung | Michal Ovádek</title>
+    <link>https://michalovadek.github.io/author/timothy-yu-cheong-yeung/</link>
+      <atom:link href="https://michalovadek.github.io/author/timothy-yu-cheong-yeung/index.xml" rel="self" type="application/rss+xml" />
+    <description>Timothy Yu-Cheong Yeung</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2022 Michal Ovádek</copyright><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://michalovadek.github.io/media/icon_hu47f642fef15b30aa1926993bc56415fb_14840_512x512_fill_lanczos_center_3.png</url>
+      <title>Timothy Yu-Cheong Yeung</title>
+      <link>https://michalovadek.github.io/author/timothy-yu-cheong-yeung/</link>
+    </image>
+    
+    <item>
+      <title>Time efficiency as a measure of court performance: evidence from the Court of Justice of the European Union</title>
+      <link>https://michalovadek.github.io/publication/yeung-2022-time/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://michalovadek.github.io/publication/yeung-2022-time/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
