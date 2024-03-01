@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Lato', sans-serif;
+    background-color: #F5F5F5; /* Lighter background */
+    color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 1.2rem; /* General font size increase */
+    line-height: 1.5;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 2fr 3fr; /* Adjusted for a larger gap */
+    gap: 90px; /* Increased gap between columns */
+    align-items: start;
+    width: 100%;
+    max-width: 960px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically centers content in the left column */
+    align-items: left; /* Horizontally centers content (useful for when it stacks on smaller screens) */
+    height: 100%;
+}
+
+.profile-img {
+    max-width: 95%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.social-links {
+    display: flex; /* Aligns links next to each other */
+    justify-content: left; /* Centers links */
+    gap: 10px; /* Adds space between links */
+    margin-bottom: 20px;
+    font-size: smaller;
+}
+
+.social-links a, .highlight a {
+    color: #0056b3;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.social-links a:hover, .highlight a:hover {
+    color: #003d82;
+}
+
+.content-right {
+    text-align: left;
+    line-height: 1.5;
+    max-width: 600px;
+}
+
+.publications-box {
+    padding: 20px; /* Spacing inside the box */
+    max-width: 800px; /* Adjust based on your layout needs */
+    margin-left: auto; /* Centering the box */
+    margin-right: auto; /* Centering the box */
+    line-height: 1.5;
+}
+
+.publications-box ul li {
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+@media(max-width:768px) {
+    .grid-layout {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .social-links a, .highlight a {
+        margin: 0 5px; /* Adjusts for smaller screens */
+    }
+
+    body {
+        font-size: 1rem; /* Slightly smaller font size for mobile */
+    }
+}
