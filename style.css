@@ -80,6 +80,7 @@ body {
     .grid-layout {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 10px;
     }
 
     .social-links {
