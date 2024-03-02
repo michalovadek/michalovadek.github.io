@@ -30,7 +30,7 @@ body {
     justify-content: center; /* Vertically centers content in the left column */
     align-items: left; /* Horizontally centers content (useful for when it stacks on smaller screens) */
     height: 100%;
-}
+    }
 
 .profile-img {
     max-width: 95%;
