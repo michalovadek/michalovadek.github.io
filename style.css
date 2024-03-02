@@ -28,9 +28,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center; /* Vertically centers content in the left column */
-    align-items: left; /* Horizontally centers content (useful for when it stacks on smaller screens) */
+    align-items: flex-start; /* Horizontally centers content (useful for when it stacks on smaller screens) */
     height: 100%;
-    }
+}
+
+.no-margin-para {
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
 
 .profile-img {
     max-width: 95%;
@@ -80,7 +85,11 @@ body {
     .grid-layout {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 10px;
+        gap: 5px;
+    }
+
+    .profile-img {
+        justify-content: center;
     }
 
     .social-links {
