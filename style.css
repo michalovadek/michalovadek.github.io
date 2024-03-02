@@ -27,8 +27,8 @@ body {
 .left-column {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Vertically centers content in the left column */
-    align-items: flex-start; /* Horizontally centers content (useful for when it stacks on smaller screens) */
+    justify-content: center;
+    align-items: flex-start;
     height: 100%;
 }
 
@@ -84,7 +84,7 @@ body {
 @media(max-width:768px) {
     .grid-layout {
         grid-template-columns: 1fr;
-        text-align: center;
+        text-align: left;
         gap: 5px;
     }
 
