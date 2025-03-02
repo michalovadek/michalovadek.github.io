@@ -81,6 +81,11 @@ body {
     padding: 5px 0;
 }
 
+.trackers-box li {
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
 @media(max-width:768px) {
     .grid-layout {
         grid-template-columns: 1fr;
