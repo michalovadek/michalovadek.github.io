@@ -4,6 +4,9 @@ project:
   render:
     - "*.qmd"
     - "trackers/*.qmd"
+  resources:
+    - "assets/**"
+    - "pic.png"
 
 website:
   title: "Michal Ovádek"
@@ -16,7 +19,10 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: [zephyr, assets/style.scss]
+      dark:  [darkly, assets/style.scss]
+    include-in-header: assets/header.html
     toc: false
     smooth-scroll: true
 

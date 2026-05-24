@@ -123,10 +123,36 @@ Expected: installation log shows each package successfully installed (may take 5
 
 Run (PowerShell):
 ```powershell
-& "C:\Program Files\R\R-4.4.3\bin\Rscript.exe" -e "renv::snapshot(prompt = FALSE)"
+& "C:\Program Files\R\R-4.4.3\bin\Rscript.exe" -e "renv::snapshot(type = 'all', library = renv::paths$library(), prompt = FALSE)"
 ```
 
-Expected: output begins "The following package(s) will be updated in the lockfile:" listing the 12 packages plus their transitive deps. Ends "Lockfile written to ..." pointing at our `renv.lock`.
+Note both flags:
+- `type = 'all'`: at this point in the sequence the project has no
+  `library()` calls yet (those land in Tasks 3–6 and 10), so the default
+  `type = 'implicit'` would record almost nothing. `type = 'all'` snapshots
+  everything actually installed in the named library.
+- `library = renv::paths$library()`: scopes the snapshot to the PROJECT
+  library only (`renv/library/...`). Without this constraint, `type = 'all'`
+  also scans the system R library and pins whatever packages happen to be
+  installed globally on this workstation (potentially hundreds — tidyverse,
+  brms, stan, sf, terra, etc.), making the lockfile huge and CI installs
+  unbearable. Always pass both together.
+
+From Task 10 onward, normal implicit snapshots will work because library()
+calls exist in the .qmd / .R files; this two-flag combo is only for the
+initial seeding.
+
+If the snapshot aborts with "pre-flight validation failure" pointing at a
+package in the system library missing a dep (e.g., `websocket` needs
+`AsioHeaders`), the `library = ...` constraint above should prevent it
+because the system library isn't scanned. If it still happens, install the
+missing dep into the project library (`renv::install("AsioHeaders")`) and
+retry — the missing-dep package then becomes part of the project library
+and the validation passes.
+
+Expected: output begins "The following package(s) will be updated in the lockfile:" listing the 12 packages plus their transitive deps (realistically ~80 total — `gt` and `arrow` each pull a fairly heavy stack: bslib, V8, juicyjuice, reactable, fontawesome, sass, cpp11, bit64, etc.). Ends "Lockfile written to ..." pointing at our `renv.lock`. Resulting `renv.lock` should be roughly 100–300 KB, NOT 1 MB+ (the 1 MB+ outcome happens when `library = ...` is omitted and the system R library gets scanned).
+
+Side effect: renv may need to install some transitive deps into the project library before the snapshot can be self-contained. This is normal — let it proceed. `library(<pkg>)` calls succeed before snapshot because `.libPaths()` includes both the project and system libraries; snapshot requires the project library alone be self-contained.
 
 - [ ] **Step 3: Verify the packages load**
 
@@ -934,6 +960,8 @@ Expected: staged changes (Changes to be committed) include AT LEAST:
 - `new file: data-external/_README.md`
 - `new file: data-manual/_README.md`
 - `modified: renv.lock`
+- `modified: renv/activate.R` (auto-updated by `renv::install("renv")` so the bootloader matches the new pinned renv version in the lockfile — they MUST be committed together)
+- `modified: docs/plans/2026-05-23-shared-infra-phase.md` (mid-execution amendments to Tasks 2 + 13 — see commit message; this entry is meta but harmless)
 
 No untracked files. No deleted files. No `_site/`, `.venv/`, `renv/library/`, `.quarto/` anywhere.
 

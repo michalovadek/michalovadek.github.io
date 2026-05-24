@@ -220,7 +220,9 @@ Shared R-package dependencies seen across old trackers (consolidate in single
 
 ## 10. Open questions / TODOs
 
-- [ ] Pick bootswatch base + final colour palette (currently undecided).
+- [x] Bootswatch base + colour palette decided 2026-05-23: zephyr (light) /
+      darkly (dark), Inter font, Okabe-Ito categorical, viridis sequential,
+      BrBG diverging. See `docs/specs/2026-05-23-shared-infra-design.md` §3.1.
 - [ ] Decide whether `data-apis/` parquet snapshots are committed (history of
       data) or only `latest.parquet` (smaller repo). Default for now: keep last
       30 daily snapshots + a monthly snapshot retained indefinitely.
