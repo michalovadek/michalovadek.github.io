@@ -1,0 +1,13 @@
+---
+title: "Michal Ovádek"
+---
+
+::: {.callout-note}
+This Quarto site is being built. The live landing page is currently still
+served from the static `index.html` at the repo root. When the consolidated
+site is ready to cut over, this file will be renamed to `index.qmd` and the
+static HTML will be deleted in a single commit. Until then, this page exists
+only at `/home.html` in the rendered Quarto output.
+
+See `AGENTS.md` for the migration plan.
+:::

@@ -1,0 +1,46 @@
+# --- Quarto -------------------------------------------------------------------
+/_site/
+/_freeze/
+/.quarto/
+
+# --- R ------------------------------------------------------------------------
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# --- renv ---------------------------------------------------------------------
+# Note: renv/activate.R and renv/settings.json ARE committed (renv writes its
+# own renv/.gitignore for the rest).
+renv/library/
+renv/python/
+renv/staging/
+renv/local/
+renv/cellar/
+renv/sandbox/
+
+# --- Python / uv --------------------------------------------------------------
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# --- Data ---------------------------------------------------------------------
+# data-manual/ is committed (curated by hand).
+# data-apis/ defaults to committed parquet snapshots (small) — exclude large
+# fallback files explicitly here as they arise.
+# data-external/ is committed but each file must have a .source.txt sidecar.
+data-apis/*.csv
+data-apis/*.tsv
+data-apis/raw/
+
+# --- OS / editor --------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~

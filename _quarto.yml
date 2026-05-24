@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "trackers/*.qmd"
+
+website:
+  title: "Michal Ovádek"
+  site-url: "https://michalovadek.github.io"
+  open-graph: true
+  navbar:
+    left:
+      - href: home.qmd
+        text: Home
+
+format:
+  html:
+    theme: cosmo
+    toc: false
+    smooth-scroll: true
+
+execute:
+  freeze: auto
